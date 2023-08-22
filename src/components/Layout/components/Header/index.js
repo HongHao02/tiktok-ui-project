@@ -20,23 +20,56 @@ import image from '~/assets/images';
 import { Wrapper as PopperWrapper } from '~/components/Popper';
 import AccountItem from '~/components/AccountItem';
 import Menu from '~/components/Popper/Menu';
+import MenuItems from '~/components/Popper/Menu/MenuItem';
 
 const cx = classNames.bind(styles);
-const MENU_ITEMS=[
+const MENU_ITEMS = [
     {
-        icon: <FontAwesomeIcon icon={faEarthAsia}/>,
-        title: "English"
+        icon: <FontAwesomeIcon icon={faEarthAsia} />,
+        title: 'English',
+        children: {
+            title: 'Language',
+            data: [
+                {
+                    code: 'en',
+                    title: 'English',
+                    children: {
+                        title: 'English 1',
+                        data: [
+                            {
+                                type: 'language',
+                                code: 'en1',
+                                title: 'English 1',
+                            },
+                            {
+                                type: 'language',
+                                code: 'en2',
+                                title: 'English 2',
+                            },
+                        ],
+                    },
+                },
+                {
+                    code: 'vi',
+                    title: 'Tiếng Việt',
+                },
+                {
+                    code: 'ko',
+                    title: 'Korean',
+                },
+            ],
+        },
     },
     {
-        icon: <FontAwesomeIcon icon={faCircleQuestion}/>,
-        title: "Feedback and help",
-        to: '/feedback'
+        icon: <FontAwesomeIcon icon={faCircleQuestion} />,
+        title: 'Feedback and help',
+        to: '/feedback',
     },
     {
-        icon: <FontAwesomeIcon icon={faKeyboard}/>,
-        title: "Keyboard Shortcuts"
-    }
-]
+        icon: <FontAwesomeIcon icon={faKeyboard} />,
+        title: 'Keyboard Shortcuts',
+    },
+];
 function Header() {
     const [searchResult, setSearchResult] = useState([]);
 
@@ -44,8 +77,18 @@ function Header() {
         setTimeout(() => {
             setSearchResult([]);
         }, 0);
-    });
+    }, searchResult);
 
+    const handleChangeMenu = (menuItem) => {
+        // console.log(memuItem);
+        switch (menuItem.type) {
+            case 'language':
+                console.log(menuItem);
+                break;
+            default:
+            //
+        }
+    };
     return (
         <header className={cx('wrapper')}>
             <div className={cx('inner')}>
@@ -87,12 +130,11 @@ function Header() {
                     {/* <Button outline leftIcon={<FontAwesomeIcon icon={faSignIn} />}>Log in</Button> */}
                     <Button primary>Log in</Button>
 
-                    <Menu items={MENU_ITEMS}>
+                    <Menu items={MENU_ITEMS} onChange={handleChangeMenu}>
                         <button className={cx('more-btn')}>
-                            <FontAwesomeIcon icon={faEllipsisVertical}/>
+                            <FontAwesomeIcon icon={faEllipsisVertical} />
                         </button>
                     </Menu>
-                    
                 </div>
             </div>
         </header>
