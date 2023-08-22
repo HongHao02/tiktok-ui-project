@@ -18,7 +18,8 @@
     align-items: center;
     justify-content: space-between;
 }
-.search , .search-result{
+.search,
+.search-result {
     width: 361px;
 }
 .search {
@@ -58,11 +59,11 @@
         border-color: rgba(22, 24, 35, 0.2);
     }
 }
-.search-title{
+.search-title {
     padding: 5px 12px;
     font-size: 1.4rem;
     font-weight: 600px;
-    color: rgba(22, 24, 35, 0.5)
+    color: rgba(22, 24, 35, 0.5);
 }
 .clear,
 .loading {
@@ -93,6 +94,13 @@
 }
 
 //For custom classes for Button component
-.custom-button-getapp{
+.custom-button-getapp {
     color: red;
+}
+
+.more-btn {
+    font-size: 2rem;
+    margin-left: 24px;
+    padding: 4px 8px;
+    background-color: transparent;
 }

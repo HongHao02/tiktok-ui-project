@@ -28,6 +28,12 @@
 .icon + .title, .title + .icon{
     margin-left: 8px;
 }
+.icon{
+    //to enable set width
+    display: inline-block;
+    text-align: center;
+    width: 24px;
+}
 //999px is tip for fix button rounded
 .rounded {
     border-radius: 999px;
