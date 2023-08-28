@@ -78,6 +78,9 @@
 }
 
 .search-btn {
+    display: flex;
+    align-items: center;
+    justify-content: center;
     width: var(--search-button-width);
     height: 100%;
     font-size: 1.8rem;
@@ -100,7 +103,7 @@
 }
 
 //Actions
-.actions{
+.actions {
     display: flex;
     align-items: center;
 }
@@ -112,20 +115,34 @@
     cursor: pointer;
 }
 
-.action-btn{
+.action-btn {
+    position: relative;
+    display: flex;
     font-size: 2.2rem;
-    margin-top: 6px;
     background-color: transparent;
     color: rgba(22, 24, 35, 1);
-    padding: 4px 12px;
+    padding: 4px 10px;
     cursor: pointer;
 }
-
-.user-avatar{
+.badge {
+    position: absolute;
+    top: -3px;
+    right: 0px;
+    padding: 0px 6px;
+    height: 2rem;
+    line-height: 2rem;
+    border-radius: 10px;
+    font-size: 1.4rem;
+    font-weight: 400;
+    color: var(--white);
+    font-family: 'TikTokFont', sans-serif;
+    background-color: var(--primary);
+}
+.user-avatar {
     width: 32px;
     height: 32px;
     object-fit: cover;
     border-radius: 50%;
-    margin-left: 12px;
+    margin-left: 14px;
     cursor: pointer;
 }
