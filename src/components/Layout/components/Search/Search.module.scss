@@ -55,7 +55,18 @@
     right: calc(var(--search-button-width) + 16px);
     font-size: 1.5rem;
 }
+.loading {
+    animation: spiner 1s linear infinite;
+}
 
+@keyframes spiner {
+    from {
+        transform: translateY(-50%) rotate(0);
+    }
+    to {
+        transform: translateY(-50%) rotate(360deg);
+    }
+}
 .search-btn {
     display: flex;
     align-items: center;
