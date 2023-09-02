@@ -8,6 +8,7 @@ import { Wrapper as PopperWrapper } from '~/components/Popper';
 import AccountItem from '~/components/AccountItem';
 import { SearchIcon } from '~/components/Icons';
 import styles from './Search.module.scss';
+import { useDebounced } from '~/components/hooks';
 
 const cx = classNames.bind(styles);
 
@@ -18,14 +19,17 @@ function Search() {
     const [loading, setLoading] = useState(false);
     const inputRef = useRef();
 
+    const debounced = useDebounced(searchValue, 600);
+    // console.log('DEBOUNCED ',debounced)
+
     useEffect(() => {
-        if (!searchValue.trim()) {
+        if (!debounced.trim()) {
             setSearchResult([]);
             return;
         }
         setLoading(true);
-
-        fetch(`https://tiktok.fullstack.edu.vn/api/users/search?q=${encodeURIComponent(searchValue)}&type=less`) //Encode characters that violate URL rules.
+        // console.log('call API')
+        fetch(`https://tiktok.fullstack.edu.vn/api/users/search?q=${encodeURIComponent(debounced)}&type=less`) //Encode characters that violate URL rules.
             .then((res) => res.json())
             .then((res) => {
                 setSearchResult(res.data);
@@ -34,7 +38,7 @@ function Search() {
             .catch(() => {
                 setLoading(false);
             });
-    }, [searchValue]);
+    }, [debounced]);
 
     const handleClear = () => {
         setSearcValue('');
@@ -42,7 +46,7 @@ function Search() {
         inputRef.current.focus();
     };
 
-    console.log(searchResult);
+    // console.log(searchResult);
     //for optimize by useCallback
     const handleShowResult = () => {
         setShowResult(false);
