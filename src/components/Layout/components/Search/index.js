@@ -1,7 +1,7 @@
 import classNames from 'classnames/bind';
 import { useEffect, useState, useRef } from 'react';
 import HeadlessTippy from '@tippyjs/react/headless';
-import { faCircleXmark, faL, faSpinner } from '@fortawesome/free-solid-svg-icons';
+import { faCircleXmark, faSpinner } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 
 import * as searchServices from '~/apiServices/searchServices';
@@ -58,7 +58,7 @@ function Search() {
             setSearcValue(searchValue);
         }
     }
-    
+
     return (
         <HeadlessTippy
             interactive
