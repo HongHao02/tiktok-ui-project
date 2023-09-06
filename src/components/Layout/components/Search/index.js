@@ -51,6 +51,14 @@ function Search() {
     const handleShowResult = () => {
         setShowResult(false);
     };
+
+    const handleChange=(e) => {
+        if (!e.target.value.startsWith(' ')) {
+            let searchValue = e.target.value;
+            setSearcValue(searchValue);
+        }
+    }
+    
     return (
         <HeadlessTippy
             interactive
@@ -76,15 +84,7 @@ function Search() {
                     type="text"
                     placeholder="Search accounts or videos"
                     spellCheck={false}
-                    onChange={(e) => {
-                        if (!e.target.value.startsWith(' ')) {
-                            let cleanedString = e.target.value;
-                            // cleanedString.replace(/\s+/g, ' ');
-                            // console.log(cleanedString) // Replace multiple consecutive spaces with a single space.
-                            setSearcValue(cleanedString);
-                        }
-                        // setSearcValue(e.target.value);
-                    }}
+                    onChange={handleChange}
                     onFocus={() => setShowResult(true)}
                 />
                 {!!searchValue && !loading && (

@@ -11,7 +11,7 @@ const cx = classNames.bind(styles);
 //tip for fix the error when we dont pass prop
 const defaultFn = () => {};
 
-function Menu({ children, items = [], onChange = defaultFn }) {
+function Menu({ children, items = [], hideOnClick = false, onChange = defaultFn }) {
     const [history, setHistory] = useState([{ data: items }]);
 
     const current = history[history.length - 1];
@@ -38,6 +38,7 @@ function Menu({ children, items = [], onChange = defaultFn }) {
         <Tippy
             offset={[12, 8]}
             interactive
+            hideOnClick={hideOnClick}
             delay={[0, 500]}
             placement="bottom-end"
             render={(attrs) => {

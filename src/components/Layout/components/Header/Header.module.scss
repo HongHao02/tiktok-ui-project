@@ -19,7 +19,9 @@
     align-items: center;
     justify-content: space-between;
 }
-
+.logo-link{
+    display: flex;
+}
 
 //For custom classes for Button component
 .custom-button-getapp {
@@ -59,7 +61,7 @@
     font-size: 1.4rem;
     font-weight: 400;
     color: var(--white);
-    font-family: 'TikTokFont', sans-serif;
+    font-family: var(--font-family);
     background-color: var(--primary);
 }
 .user-avatar {

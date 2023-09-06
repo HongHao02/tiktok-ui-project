@@ -16,9 +16,11 @@
         flex: 1;
         height: 100%; //Allow the input element's height to match that of the search for ease of interaction.
         font-size: 1.6rem;
+        padding-right: 40px; //prevent overflow when write too much into input
         color: var(--black);
         caret-color: var(--primary);
         background-color: transparent;
+        font-family: var(--font-family);
     }
 
     input:not(:placeholder-shown) ~ .search-btn {
@@ -34,7 +36,9 @@
         height: calc(var(--search-height) - var(--search-top-spacer) * 2);
         background-color: rgba(22, 24, 35, 0.12);
     }
-
+    &:hover {
+        border-color: rgba(22, 24, 35, 0.2);
+    }
     &:focus-within {
         border-color: rgba(22, 24, 35, 0.2);
     }
