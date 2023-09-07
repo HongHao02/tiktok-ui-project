@@ -3,6 +3,8 @@
     //Độ cao không bao giờ vượt quá độ cao màn hình
     max-height: min((100vh - 96px) - 60px, 734px);
     min-height: 100px;
+    display: flex;
+    flex-direction: column;
     padding-top: 8px;
     background: rgb(255, 255, 255);
     box-shadow: rgb(0 0 0 / 12%) 0px 2px 12px;
