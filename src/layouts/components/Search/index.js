@@ -4,7 +4,7 @@ import HeadlessTippy from '@tippyjs/react/headless';
 import { faCircleXmark, faSpinner } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 
-import * as searchServices from '~/apiServices/searchServices';
+import * as searchService from '~/services/searchService';
 import { Wrapper as PopperWrapper } from '~/components/Popper';
 import AccountItem from '~/components/AccountItem';
 import { SearchIcon } from '~/components/Icons';
@@ -31,7 +31,7 @@ function Search() {
         const fetchApi = async () => {
             setLoading(true);
 
-            const result = await searchServices.search(debounced);
+            const result = await searchService.search(debounced);
             setSearchResult(result);
 
             setLoading(false);
@@ -52,15 +52,15 @@ function Search() {
         setShowResult(false);
     };
 
-    const handleChange=(e) => {
+    const handleChange = (e) => {
         if (!e.target.value.startsWith(' ')) {
             let searchValue = e.target.value;
             setSearcValue(searchValue);
         }
-    }
+    };
 
     return (
-        //Using a wrapper <div> tag around the reference element solves this by creating a new parentNode context. 
+        //Using a wrapper <div> tag around the reference element solves this by creating a new parentNode context.
         <div>
             <HeadlessTippy
                 interactive
@@ -94,9 +94,9 @@ function Search() {
                             <FontAwesomeIcon icon={faCircleXmark} />
                         </button>
                     )}
-    
+
                     {loading && <FontAwesomeIcon className={cx('loading')} icon={faSpinner} />}
-    
+
                     <button className={cx('search-btn')}>
                         <SearchIcon />
                     </button>
