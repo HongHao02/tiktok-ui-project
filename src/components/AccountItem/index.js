@@ -1,4 +1,5 @@
 import classNames from 'classnames/bind';
+import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom';
 import styles from './AccountItem.module.scss';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
@@ -24,6 +25,11 @@ function AccountItem({ data }) {
             </div>
         </Link>
     );
+}
+
+//use PropTypes to validate the prop
+AccountItem.propTypes={
+    data: PropTypes.object,
 }
 
 export default AccountItem;

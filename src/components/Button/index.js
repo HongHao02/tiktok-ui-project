@@ -1,4 +1,6 @@
 import classNames from 'classnames/bind';
+import PropTypes from 'prop-types'
+
 import styles from './Button.module.scss';
 import { Link } from 'react-router-dom';
 const cx = classNames.bind(styles);
@@ -64,4 +66,10 @@ function Button({
     );
 }
 
+//// Anything that can be rendered: numbers, strings, elements or an array
+  // (or fragment) containing these types.
+    // see https://reactjs.org/docs/rendering-elements.html for more info
+Button.propTypes={
+    children: PropTypes.node.isRequired,
+}
 export default Button;

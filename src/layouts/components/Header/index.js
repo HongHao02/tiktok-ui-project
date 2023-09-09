@@ -119,6 +119,10 @@ function Header() {
         <header className={cx('wrapper')}>
             <div className={cx('inner')}>
                 <Link to={config.routes.home} className={cx('logo-link')}><img src={image.logo} alt="Tiktok" /></Link>
+
+                {/*IN PropTypes: if we use <Button>{()=>{}}</Button> the error will occur*/}
+                {/* <Button>{[1,2,3]}</Button> */}
+                {/* <Button></Button> the error will occur because we validated the prop children by PropTypes*/}
                 <Search/>
                 <div className={cx('actions')}>
                     {currentUser ? (
