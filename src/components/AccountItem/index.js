@@ -11,11 +11,7 @@ const cx = classNames.bind(styles);
 function AccountItem({ data }) {
     return (
         <Link to={`/${data.nickname}`} className={cx('wrapper')}>
-            <Image
-                className={cx('image')}
-                src={data.avatar}
-                alt={data.nickname}
-            />
+            <Image className={cx('image')} src={data.avatar} alt={data.nickname} />
             <div className={cx('info')}>
                 <h4 className={cx('name')}>
                     <span>{data.full_name}</span>
@@ -28,8 +24,8 @@ function AccountItem({ data }) {
 }
 
 //use PropTypes to validate the prop
-AccountItem.propTypes={
-    data: PropTypes.object,
-}
+AccountItem.propTypes = {
+    data: PropTypes.object.isRequired,
+};
 
 export default AccountItem;

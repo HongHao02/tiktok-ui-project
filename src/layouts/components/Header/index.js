@@ -157,7 +157,7 @@ function Header() {
                             <Image
                                 className={cx('user-avatar')}
                                 src=""
-                                alt="TranPhuongHoa"
+                                alt="no-avatar"
                                 fallback="https://p77-sign-va.tiktokcdn.com/tos-maliva-avt-0068/7d95aabe6b6a3ca5fcc1980e34f3cd87~c5_100x100.jpeg?x-expires=1693256400&x-signature=HC%2BOMRqLcE9Fi6SquMtOtp7tt6U%3D"
                             />
                         ) : (

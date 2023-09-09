@@ -1,5 +1,5 @@
 import classNames from 'classnames/bind';
-import PropTypes from 'prop-types'
+import PropTypes from 'prop-types';
 
 import styles from './Button.module.scss';
 import { Link } from 'react-router-dom';
@@ -66,10 +66,23 @@ function Button({
     );
 }
 
-//// Anything that can be rendered: numbers, strings, elements or an array
-  // (or fragment) containing these types.
-    // see https://reactjs.org/docs/rendering-elements.html for more info
-Button.propTypes={
+//// (PropTypes.node)Anything that can be rendered: numbers, strings, elements or an array
+// (or fragment) containing these types.
+// see https://reactjs.org/docs/rendering-elements.html for more info
+Button.propTypes = {
+    to: PropTypes.string,
+    href: PropTypes.string,
+    primary: PropTypes.bool,
+    outline: PropTypes.bool,
+    text: PropTypes.bool,
+    rounded: PropTypes.bool,
+    disable: PropTypes.bool,
     children: PropTypes.node.isRequired,
-}
+    small: PropTypes.bool,
+    large: PropTypes.bool,
+    className: PropTypes.string,
+    leftIcon: PropTypes.node,
+    rightIcon: PropTypes.node,
+    onClick: PropTypes.func,
+};
 export default Button;
