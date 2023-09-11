@@ -16,7 +16,7 @@ const cx = classNames.bind(styles);
 function Search() {
     const [searchValue, setSearcValue] = useState('');
     const [searchResult, setSearchResult] = useState([]);
-    const [showResult, setShowResult] = useState(true);
+    const [showResult, setShowResult] = useState(false);
     const [loading, setLoading] = useState(false);
     const inputRef = useRef();
 
@@ -55,7 +55,10 @@ function Search() {
     const handleChange = (e) => {
         if (!e.target.value.startsWith(' ')) {
             let searchValue = e.target.value;
-            setSearcValue(searchValue);
+            //if the lenght over 100 don't setState
+            if(searchValue.length < 100){
+                setSearcValue(searchValue);
+            } 
         }
     };
 

@@ -22,7 +22,7 @@ import Menu from '~/components/Popper/Menu';
 import { UploadIcon, MessageIcon, InboxIcon } from '~/components/Icons';
 import Image from '~/components/Image';
 import Search from '~/layouts/components/Search';
-import config from '~/config'
+import config from '~/config';
 
 const cx = classNames.bind(styles);
 const MENU_ITEMS = [
@@ -77,7 +77,7 @@ const USER_MENU = [
     {
         icon: <FontAwesomeIcon icon={faUser} />,
         title: 'View profile',
-        to: '/@hoaa',
+        to: '/hoaa',
     },
     {
         icon: <FontAwesomeIcon icon={faBookBookmark} />,
@@ -118,12 +118,14 @@ function Header() {
     return (
         <header className={cx('wrapper')}>
             <div className={cx('inner')}>
-                <Link to={config.routes.home} className={cx('logo-link')}><img src={image.logo} alt="Tiktok" /></Link>
+                <Link to={config.routes.home} className={cx('logo-link')}>
+                    <img src={image.logo} alt="Tiktok" />
+                </Link>
 
                 {/*IN PropTypes: if we use <Button>{()=>{}}</Button> the error will occur*/}
                 {/* <Button>{[1,2,3]}</Button> */}
                 {/* <Button></Button> the error will occur because we validated the prop children by PropTypes*/}
-                <Search/>
+                <Search />
                 <div className={cx('actions')}>
                     {currentUser ? (
                         <>
