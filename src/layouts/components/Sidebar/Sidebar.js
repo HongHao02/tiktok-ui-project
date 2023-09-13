@@ -2,6 +2,8 @@ import classNames from 'classnames/bind';
 
 import Menu, { MenuItem } from './Menu';
 import styles from './Sidebar.module.scss';
+import SuggestedAccount from '~/components/SuggestedAccount';
+
 import {
     HomeIcon,
     HomeIconActive,
@@ -25,6 +27,9 @@ function Sidebar() {
                 />
                 <MenuItem title="Live" to="/live" icon={<LiveIcon />} activeIcon={<LiveIconActive />} />
             </Menu>
+            <SuggestedAccount lable="Sugggested accounts"/>
+            <SuggestedAccount lable="Following accounts"/>
+
         </aside>
     );
 }
