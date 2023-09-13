@@ -10,13 +10,12 @@ function SuggestedAccounts({ lable }) {
     return (
         <div className={cx('wrapper')}>
             <p className={cx('lable')}>{lable}</p>
-
             <AccountItem/>
             <AccountItem/>
             <AccountItem/>
-
+            <AccountItem/>
+            <AccountItem/>
             <p className={cx('more-btn')}>See all</p>
-
         </div>
     );
 }
