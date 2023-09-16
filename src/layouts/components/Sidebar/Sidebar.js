@@ -1,9 +1,9 @@
 import classNames from 'classnames/bind';
+import { useState, useEffect } from 'react';
 
 import Menu, { MenuItem } from './Menu';
 import styles from './Sidebar.module.scss';
 import SuggestedAccount from '~/components/SuggestedAccount';
-
 import {
     HomeIcon,
     HomeIconActive,
@@ -12,9 +12,27 @@ import {
     LiveIcon,
     LiveIconActive,
 } from '~/components/Icons';
+import * as userService from '~/services/userService';
 
 const cx = classNames.bind(styles);
+
+const PER_PAGE = 5;
 function Sidebar() {
+    const [suggestedUsers, setSuggestedUsers] = useState([]);
+
+    useEffect(() => {
+        userService
+            .getSuggested({ page: 1, perPage: PER_PAGE })
+            .then((data) => {
+                setSuggestedUsers((prev) => [...prev, ...data]);
+            })
+            .catch((error) => console.log(error));
+    }, []);
+
+    // const handleSeeAll= useCallback(()=>{
+    //     //for optimize later
+    // }, [])
+
     return (
         <aside className={cx('wrapper')}>
             <Menu>
@@ -27,9 +45,11 @@ function Sidebar() {
                 />
                 <MenuItem title="Live" to="/live" icon={<LiveIcon />} activeIcon={<LiveIconActive />} />
             </Menu>
-            <SuggestedAccount lable="Sugggested accounts"/>
-            <SuggestedAccount lable="Following accounts"/>
-
+            <SuggestedAccount
+                lable="Sugggested accounts"
+                data={suggestedUsers}
+            />
+            <SuggestedAccount lable="Following accounts" />
         </aside>
     );
 }
