@@ -1,6 +1,19 @@
-.wrapper {
+.sidebar-container {
     width: 300px;
-    min-height: 100%;
+    overflow-y: hidden;
+    margin-top: 2px;
+    margin-bottom: 60px;
+
+    &:hover {
+        overflow-y: overlay;
+    }
+}
+.sidebar-container::-webkit-scrollbar {
+    border-radius: 0;
+    width: 4px;
+}
+
+.wrapper {
+    height: auto;
     padding: 20px 8px 26px;
-    overflow-y: auto;
 }

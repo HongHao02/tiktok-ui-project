@@ -17,39 +17,78 @@ import ReferenceArea from '~/components/ReferenceArea';
 
 const cx = classNames.bind(styles);
 
+const INIT_PAGE = 1;
 const PER_PAGE = 5;
+const SEE_ALL_PER_PAGE = 20;
 function Sidebar() {
+    const [page, setPage] = useState(INIT_PAGE);
+    const [perPage, setPerPage] = useState(PER_PAGE);
+    const [showAll, setShowAll] = useState(false);
+    const [apiCalled, setApiCalled] = useState(false);
+    const [initialSuggestedUsers, setInitialSuggestedUsers] = useState([]);
+    const [allSuggestedUsers, setAllInitialSuggestedUsers] = useState([]);
     const [suggestedUsers, setSuggestedUsers] = useState([]);
 
     useEffect(() => {
-        userService
-            .getSuggested({ page: 1, perPage: PER_PAGE })
-            .then((data) => {
-                setSuggestedUsers((prev) => [...prev, ...data]);
-            })
-            .catch((error) => console.log(error));
-    }, []);
+        if (initialSuggestedUsers.length === 0) {
+            userService
+                .getSuggested({ page, perPage: perPage })
+                .then((data) => {
+                    setInitialSuggestedUsers(data);
+                    setSuggestedUsers(data);
+                })
+                .catch((error) => console.log(error));
+        } else if (!apiCalled && showAll) {
+            userService
+                .getSuggested({ page, perPage: perPage })
+                .then((data) => {
+                    setAllInitialSuggestedUsers(data);
+                    setSuggestedUsers(data);
+                    setApiCalled(true);
+                })
+                .catch((error) => console.log(error));
+        } else if (!showAll) {
+            setSuggestedUsers(initialSuggestedUsers);
+        } else if (showAll) {
+            setSuggestedUsers(allSuggestedUsers);
+        }
+    }, [allSuggestedUsers, apiCalled, initialSuggestedUsers, page, perPage, showAll]);
 
     // const handleSeeAll= useCallback(()=>{
     //     //for optimize later
     // }, [])
-
+    const handleSeeAll = () => {
+        setPerPage(SEE_ALL_PER_PAGE);
+        setShowAll(true);
+    };
+    const handleSeeLess = () => {
+        setPerPage(PER_PAGE);
+        setShowAll(false);
+    };
     return (
-        <aside className={cx('wrapper')}>
-            <Menu>
-                <MenuItem title="For you" to="/" icon={<HomeIcon />} activeIcon={<HomeIconActive />} />
-                <MenuItem
-                    title="Following"
-                    to="/following"
-                    icon={<UserGroupIcon />}
-                    activeIcon={<UserGroupIconActive />}
+        <div className={cx('sidebar-container')}>
+            <aside className={cx('wrapper')}>
+                <Menu>
+                    <MenuItem title="For you" to="/" icon={<HomeIcon />} activeIcon={<HomeIconActive />} />
+                    <MenuItem
+                        title="Following"
+                        to="/following"
+                        icon={<UserGroupIcon />}
+                        activeIcon={<UserGroupIconActive />}
+                    />
+                    <MenuItem title="Live" to="/live" icon={<LiveIcon />} activeIcon={<LiveIconActive />} />
+                </Menu>
+                <SuggestedAccount
+                    lable="Sugggested accounts"
+                    data={suggestedUsers}
+                    onSeeAll={handleSeeAll}
+                    onSeeLess={handleSeeLess}
+                    isShowAll={showAll}
                 />
-                <MenuItem title="Live" to="/live" icon={<LiveIcon />} activeIcon={<LiveIconActive />} />
-            </Menu>
-            <SuggestedAccount lable="Sugggested accounts" data={suggestedUsers} />
-            <SuggestedAccount lable="Following accounts" />
-            <ReferenceArea />
-        </aside>
+                <SuggestedAccount lable="Following accounts" />
+                <ReferenceArea />
+            </aside>
+        </div>
     );
 }
 

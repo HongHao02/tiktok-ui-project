@@ -31,9 +31,8 @@ body {
     font-size: 1.6rem;
     text-rendering: optimizeSpeed;
     font-weight: 600;
-    overflow-y: overlay;
+    overflow-y: hidden;
 }
-
 //Scrollbar CSS
 html *::-webkit-scrollbar {
     border-radius: 0;

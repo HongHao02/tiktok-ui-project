@@ -99,7 +99,6 @@ function ReferenceArea() {
                 lable="Create effects"
             />
             <div className={cx('references')}>
-                {console.log(refIntroductions)}
                 <div>{renderRef(refIntroductions)}</div>
                 <div>{renderRef(refFeatures)}</div>
                 <div>{renderRef(refHelp)}</div>
