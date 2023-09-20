@@ -1,0 +1,967 @@
+{
+	"info": {
+		"_postman_id": "6ea46510-3f0c-4367-83bc-da66ddebc8da",
+		"name": "Tiktok API",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "17115154"
+	},
+	"item": [
+		{
+			"name": "Auth",
+			"item": [
+				{
+					"name": "[Auth] Get current user",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{API_ENDPOINT}}/api/auth/me",
+							"host": [
+								"{{API_ENDPOINT}}"
+							],
+							"path": [
+								"api",
+								"auth",
+								"me"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "[Auth] Update current user",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "first_name",
+									"value": "Đào Lê",
+									"description": "Tên đầu tiên",
+									"type": "text"
+								},
+								{
+									"key": "last_name",
+									"value": "Phương Hoa",
+									"description": "Tên cuối cùng",
+									"type": "text"
+								},
+								{
+									"key": "avatar",
+									"description": "Ảnh đại diện",
+									"type": "file",
+									"src": "/D:/Downloads/ea0854578085ab26effc2c7b8cefa270_c5_100x100.jpeg"
+								},
+								{
+									"key": "gender",
+									"value": "female",
+									"description": "Giới tính. Bao gồm: male, female",
+									"type": "text"
+								},
+								{
+									"key": "bio",
+									"value": "✨ 1998 ✨\nVietnam 🇻🇳\nĐỪNG LẤY VIDEO CỦA TÔI ĐI SO SÁNH NỮA. XIN HÃY TÔN TRỌNG !",
+									"description": "Trạng thái, tiểu sử, giới thiệu",
+									"type": "text"
+								},
+								{
+									"key": "date_of_birth",
+									"value": "2003-04-06",
+									"description": "Ngày sinh",
+									"type": "text"
+								},
+								{
+									"key": "website_url",
+									"value": "https://fullstack.edu.vn/",
+									"description": "URL tới website của bạn",
+									"type": "text"
+								},
+								{
+									"key": "facebook_url",
+									"value": "",
+									"description": "URL tới trang facebook của bạn",
+									"type": "text",
+									"disabled": true
+								},
+								{
+									"key": "youtube_url",
+									"value": "",
+									"description": "URL tới trang youtube của bạn",
+									"type": "text",
+									"disabled": true
+								},
+								{
+									"key": "twitter_url",
+									"value": "",
+									"description": "URL tới trang twitter của bạn",
+									"type": "text",
+									"disabled": true
+								},
+								{
+									"key": "instagram_url",
+									"value": "",
+									"description": "URL tới trang instagram của bạn",
+									"type": "text",
+									"disabled": true
+								}
+							]
+						},
+						"url": {
+							"raw": "{{API_ENDPOINT}}/api/auth/me?_method=PATCH",
+							"host": [
+								"{{API_ENDPOINT}}"
+							],
+							"path": [
+								"api",
+								"auth",
+								"me"
+							],
+							"query": [
+								{
+									"key": "_method",
+									"value": "PATCH"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Register",
+					"request": {
+						"auth": {
+							"type": "noauth"
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"type\": \"email\",\n    \"email\": \"sondnf8@gmail.com\",\n    \"password\": \"123456\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{API_ENDPOINT}}/api/auth/register",
+							"host": [
+								"{{API_ENDPOINT}}"
+							],
+							"path": [
+								"api",
+								"auth",
+								"register"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Login",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"email\": \"tuan98@gmail.com\",\n    \"password\": \"wtftuan1998\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{API_ENDPOINT}}/api/auth/login",
+							"host": [
+								"{{API_ENDPOINT}}"
+							],
+							"path": [
+								"api",
+								"auth",
+								"login"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Logout",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{API_ENDPOINT}}/api/auth/logout",
+							"host": [
+								"{{API_ENDPOINT}}"
+							],
+							"path": [
+								"api",
+								"auth",
+								"logout"
+							]
+						}
+					},
+					"response": []
+				}
+			],
+			"event": [
+				{
+					"listen": "prerequest",
+					"script": {
+						"type": "text/javascript",
+						"exec": [
+							""
+						]
+					}
+				},
+				{
+					"listen": "test",
+					"script": {
+						"type": "text/javascript",
+						"exec": [
+							""
+						]
+					}
+				}
+			]
+		},
+		{
+			"name": "Videos",
+			"item": [
+				{
+					"name": "Get videos list",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{API_ENDPOINT}}/api/videos?type=for-you&page=1",
+							"host": [
+								"{{API_ENDPOINT}}"
+							],
+							"path": [
+								"api",
+								"videos"
+							],
+							"query": [
+								{
+									"key": "type",
+									"value": "for-you",
+									"description": "Có 2 giá trị là \"for-you\" và \"following\". for-you: Lấy danh sách posts dành cho bạn. following: Lấy danh sách posts của những người bạn đang theo dõi"
+								},
+								{
+									"key": "page",
+									"value": "1",
+									"description": "Dùng để tải thêm dữ liệu posts. VD: Khi ở trang 1 sẽ tải 10 posts đầu, sang trang 2 sẽ tải thêm 10 posts tiếp theo"
+								},
+								{
+									"key": "except",
+									"value": "3eecee55-3e2b-4579-9869-5fbe24026079",
+									"description": "UID của video sẽ bị loại trừ khỏi kết quả",
+									"disabled": true
+								}
+							]
+						},
+						"description": "API lấy danh sách các posts được hiển thị ở trang chủ: For You & Following"
+					},
+					"response": []
+				},
+				{
+					"name": "Get a video",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{API_ENDPOINT}}/api/posts/334c1ddb-186d-4805-9bcd-0bb6622e79bc",
+							"host": [
+								"{{API_ENDPOINT}}"
+							],
+							"path": [
+								"api",
+								"posts",
+								"334c1ddb-186d-4805-9bcd-0bb6622e79bc"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "[Auth] Update a video",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "description",
+									"value": "Tập thể dục buổi trưa đi cả nhà ơi 😄",
+									"description": "Mô tả bài đăng",
+									"type": "text"
+								},
+								{
+									"key": "upload_file",
+									"description": "File sẽ được upload",
+									"type": "file",
+									"src": "/Users/admin/Downloads/girl-01.mp4"
+								},
+								{
+									"key": "thumbnail_time",
+									"value": "10",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "{{API_ENDPOINT}}/api/videos/12?_method=PATCH",
+							"host": [
+								"{{API_ENDPOINT}}"
+							],
+							"path": [
+								"api",
+								"videos",
+								"12"
+							],
+							"query": [
+								{
+									"key": "_method",
+									"value": "PATCH"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "[Auth] Delete a video",
+					"request": {
+						"method": "DELETE",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"description\": \"Đồ ăn quán bi-a cứ bị ngon ý 😆 #Boxstudio\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{API_ENDPOINT}}/api/videos/10",
+							"host": [
+								"{{API_ENDPOINT}}"
+							],
+							"path": [
+								"api",
+								"videos",
+								"10"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "[Auth] Create a new video",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "description",
+									"value": "đừng ai xem đến cuối =)))) ig: blmhuong",
+									"description": "Mô tả bài đăng",
+									"type": "text"
+								},
+								{
+									"key": "upload_file",
+									"description": "File sẽ được upload",
+									"type": "file",
+									"src": "/Users/admin/Downloads/girl-01.mp4"
+								},
+								{
+									"key": "thumbnail_time",
+									"value": "5",
+									"description": "Vị trí chụp thumbnail, đơn vị giây",
+									"type": "text"
+								},
+								{
+									"key": "music",
+									"value": "Hi",
+									"description": "Tên bài nhạc trong video",
+									"type": "text",
+									"disabled": true
+								},
+								{
+									"key": "viewable",
+									"value": "public",
+									"description": "Chế độ giới hạn người xem gồm: public, friends và private",
+									"type": "text"
+								},
+								{
+									"key": "allows[]",
+									"value": "comment",
+									"description": "Cho phép comment trên bài post",
+									"type": "text"
+								},
+								{
+									"key": "allows[]",
+									"value": "duet",
+									"description": "Cho phép duet/react trên bài post",
+									"type": "text",
+									"disabled": true
+								},
+								{
+									"key": "allows[]",
+									"value": "stitch",
+									"description": "Cho phép người dùng khác sử dụng lại bài post",
+									"type": "text",
+									"disabled": true
+								}
+							]
+						},
+						"url": {
+							"raw": "{{API_ENDPOINT}}/api/videos",
+							"host": [
+								"{{API_ENDPOINT}}"
+							],
+							"path": [
+								"api",
+								"videos"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "[Aurh] Get user's liked videos",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{API_ENDPOINT}}/api/users/1/liked-posts",
+							"host": [
+								"{{API_ENDPOINT}}"
+							],
+							"path": [
+								"api",
+								"users",
+								"1",
+								"liked-posts"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get user's videos",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{API_ENDPOINT}}/api/users/1/posts",
+							"host": [
+								"{{API_ENDPOINT}}"
+							],
+							"path": [
+								"api",
+								"users",
+								"1",
+								"posts"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Users",
+			"item": [
+				{
+					"name": "Get suggested users list",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{API_ENDPOINT}}/api/users/suggested?page=1&per_page=12",
+							"host": [
+								"{{API_ENDPOINT}}"
+							],
+							"path": [
+								"api",
+								"users",
+								"suggested"
+							],
+							"query": [
+								{
+									"key": "page",
+									"value": "1",
+									"description": "Số trang. VD trang 1 tải 5 users thì trang 2 sẽ tải thêm 5 users tiếp theo"
+								},
+								{
+									"key": "except",
+									"value": "11",
+									"description": "Danh sách id sẽ bị loại trừ khỏi response, phân cách các id bằng dấu phẩy. VD: 1,2,3,4",
+									"disabled": true
+								},
+								{
+									"key": "per_page",
+									"value": "12",
+									"description": "Số lượng trả về trên một trang"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get an user",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{API_ENDPOINT}}/api/users/@sondnf8",
+							"host": [
+								"{{API_ENDPOINT}}"
+							],
+							"path": [
+								"api",
+								"users",
+								"@sondnf8"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Likes",
+			"item": [
+				{
+					"name": "[Auth] Like a post",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"url": {
+							"raw": "{{API_ENDPOINT}}/api/posts/1/like",
+							"host": [
+								"{{API_ENDPOINT}}"
+							],
+							"path": [
+								"api",
+								"posts",
+								"1",
+								"like"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "[Auth] Unlike a post",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"url": {
+							"raw": "{{API_ENDPOINT}}/api/posts/1/unlike",
+							"host": [
+								"{{API_ENDPOINT}}"
+							],
+							"path": [
+								"api",
+								"posts",
+								"1",
+								"unlike"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "[Auth] Like a comment",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"url": {
+							"raw": "{{API_ENDPOINT}}/api/comments/5/like",
+							"host": [
+								"{{API_ENDPOINT}}"
+							],
+							"path": [
+								"api",
+								"comments",
+								"5",
+								"like"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "[Auth] Unlike a comment",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"url": {
+							"raw": "{{API_ENDPOINT}}/api/comments/4/unlike",
+							"host": [
+								"{{API_ENDPOINT}}"
+							],
+							"path": [
+								"api",
+								"comments",
+								"4",
+								"unlike"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Comments",
+			"item": [
+				{
+					"name": "[Auth] Update a comment",
+					"request": {
+						"method": "PATCH",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"comment\": \"Xin chào anh em nhé!\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{API_ENDPOINT}}/api/comments/1",
+							"host": [
+								"{{API_ENDPOINT}}"
+							],
+							"path": [
+								"api",
+								"comments",
+								"1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "[Auth] Delete a comment",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"comment\": \"Xin chào anh em nhé!\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{API_ENDPOINT}}/api/comments/1",
+							"host": [
+								"{{API_ENDPOINT}}"
+							],
+							"path": [
+								"api",
+								"comments",
+								"1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "[Auth] Create a new comment on a post",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"comment\": \"Xin chào anh em!\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{API_ENDPOINT}}/api/posts/49df7460-faaa-4739-9f02-ec6f80b5458d/comments",
+							"host": [
+								"{{API_ENDPOINT}}"
+							],
+							"path": [
+								"api",
+								"posts",
+								"49df7460-faaa-4739-9f02-ec6f80b5458d",
+								"comments"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "[Auth] Get comments list of a post",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{API_ENDPOINT}}/api/posts/1/comments",
+							"host": [
+								"{{API_ENDPOINT}}"
+							],
+							"path": [
+								"api",
+								"posts",
+								"1",
+								"comments"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Follow",
+			"item": [
+				{
+					"name": "[Auth] Get followings list",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"url": {
+							"raw": "{{API_ENDPOINT}}/api/me/followings?page=1",
+							"host": [
+								"{{API_ENDPOINT}}"
+							],
+							"path": [
+								"api",
+								"me",
+								"followings"
+							],
+							"query": [
+								{
+									"key": "page",
+									"value": "1",
+									"description": "Số trang. VD trang 1 tải 5 users thì trang 2 sẽ tải thêm 5 users tiếp theo"
+								},
+								{
+									"key": "except",
+									"value": "1,2",
+									"description": "Danh sách id sẽ bị loại trừ khỏi response, phân cách các id bằng dấu phẩy. VD: 1,2,3,4",
+									"disabled": true
+								}
+							]
+						},
+						"description": "API lấy danh sách following của tài khoản đang đăng nhập."
+					},
+					"response": []
+				},
+				{
+					"name": "[Auth] Unfollow a user",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"url": {
+							"raw": "{{API_ENDPOINT}}/api/users/3/unfollow",
+							"host": [
+								"{{API_ENDPOINT}}"
+							],
+							"path": [
+								"api",
+								"users",
+								"3",
+								"unfollow"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "[Auth] Follow a user",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"url": {
+							"raw": "{{API_ENDPOINT}}/api/users/3/follow",
+							"host": [
+								"{{API_ENDPOINT}}"
+							],
+							"path": [
+								"api",
+								"users",
+								"3",
+								"follow"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Search",
+			"item": [
+				{
+					"name": "Search users",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{API_ENDPOINT}}/api/users/search?q=f&type=less",
+							"host": [
+								"{{API_ENDPOINT}}"
+							],
+							"path": [
+								"api",
+								"users",
+								"search"
+							],
+							"query": [
+								{
+									"key": "q",
+									"value": "f",
+									"description": "Chuỗi muốn tìm kiếm. Ví dụ: \"phuocofficial\""
+								},
+								{
+									"key": "type",
+									"value": "less",
+									"description": "\"less\" hoặc \"more\". \"less\" chỉ trả về 5 kết quả tìm kiếm (sử dụng khi tìm trên header). \"more\" để tìm trong trang tìm kiếm, kết quả được phân trang, mỗi trang 10 kết quả"
+								},
+								{
+									"key": "page",
+									"value": "1",
+									"description": "Trả về kết quả theo trang, dùng khi type=\"more\"",
+									"disabled": true
+								}
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		}
+	],
+	"auth": {
+		"type": "bearer",
+		"bearer": [
+			{
+				"key": "token",
+				"value": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJodHRwOlwvXC90aWt0b2suZnVsbHN0YWNrLmVkdS52blwvYXBpXC9hdXRoXC9yZWdpc3RlciIsImlhdCI6MTY1MTc0MjI1OSwiZXhwIjoxNjU0MzM0MjU5LCJuYmYiOjE2NTE3NDIyNTksImp0aSI6ImdremlxN05LcFJrdVJYSVoiLCJzdWIiOjUsInBydiI6IjIzYmQ1Yzg5NDlmNjAwYWRiMzllNzAxYzQwMDg3MmRiN2E1OTc2ZjcifQ.IF9kZeYa8zqAaTmUJFh640ylAb8Lmku2sb2OkPcQ0M0",
+				"type": "string"
+			}
+		]
+	},
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		}
+	],
+	"variable": [
+		{
+			"key": "TOKEN",
+			"value": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJodHRwOlwvXC90aWt0b2suZjh0ZWFtLmRldlwvYXBpXC9hdXRoXC9yZWdpc3RlciIsImlhdCI6MTYxODIzMTQ2NCwiZXhwIjoxNjIwODIzNDY0LCJuYmYiOjE2MTgyMzE0NjQsImp0aSI6IjRQR3QzUlhicThnNFpmOTIiLCJzdWIiOjEsInBydiI6IjIzYmQ1Yzg5NDlmNjAwYWRiMzllNzAxYzQwMDg3MmRiN2E1OTc2ZjcifQ.3luuL23ab232Kog25dIEfKIZX5HZwumRmBbSh7mrsNs"
+		},
+		{
+			"value": ""
+		}
+	]
+}

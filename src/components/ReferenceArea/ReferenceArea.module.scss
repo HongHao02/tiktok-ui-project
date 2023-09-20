@@ -1,0 +1,37 @@
+.wrapper {
+    border-top: 1px solid #e3e3e4;
+    position: relative;
+    padding-top: 16px;
+    padding-left: 8px;
+    font-size: 1.2rem;
+}
+//references
+.references {
+    display: flex;
+    flex-direction: column;
+    
+
+    & div {
+        
+        margin-bottom: 8px;
+        display: flex;
+        flex-wrap: wrap;
+    }
+
+    & a {
+        color: #16182380;
+        margin: 5px 6px 0 0;
+        font-size: 1.2rem;
+        font-weight: 600;
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
+
+        &:hover {
+            text-decoration: underline;
+        }
+    }
+    & span{
+        color: #16182380;
+    }
+}

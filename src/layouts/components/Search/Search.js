@@ -56,9 +56,9 @@ function Search() {
         if (!e.target.value.startsWith(' ')) {
             let searchValue = e.target.value;
             //if the lenght over 100 don't setState
-            if(searchValue.length < 100){
+            if (searchValue.length < 100) {
                 setSearcValue(searchValue);
-            } 
+            }
         }
     };
 

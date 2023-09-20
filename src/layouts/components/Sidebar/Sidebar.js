@@ -13,6 +13,7 @@ import {
     LiveIconActive,
 } from '~/components/Icons';
 import * as userService from '~/services/userService';
+import ReferenceArea from '~/components/ReferenceArea';
 
 const cx = classNames.bind(styles);
 
@@ -45,11 +46,9 @@ function Sidebar() {
                 />
                 <MenuItem title="Live" to="/live" icon={<LiveIcon />} activeIcon={<LiveIconActive />} />
             </Menu>
-            <SuggestedAccount
-                lable="Sugggested accounts"
-                data={suggestedUsers}
-            />
+            <SuggestedAccount lable="Sugggested accounts" data={suggestedUsers} />
             <SuggestedAccount lable="Following accounts" />
+            <ReferenceArea />
         </aside>
     );
 }
