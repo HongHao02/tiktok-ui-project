@@ -20,8 +20,10 @@ const cx = classNames.bind(styles);
 const INIT_PAGE = 1;
 const PER_PAGE = 5;
 const SEE_ALL_PER_PAGE = 20;
+const MAX_INITIAL_FOLLOWING_USERS = 5;
+
 function Sidebar() {
-    const [page, setPage] = useState(INIT_PAGE);
+    const [pageSuggested, setPageSuggested] = useState(INIT_PAGE);
     const [perPage, setPerPage] = useState(PER_PAGE);
     const [showAll, setShowAll] = useState(false);
     const [apiCalled, setApiCalled] = useState(false);
@@ -29,10 +31,17 @@ function Sidebar() {
     const [allSuggestedUsers, setAllInitialSuggestedUsers] = useState([]);
     const [suggestedUsers, setSuggestedUsers] = useState([]);
 
+    const [followingPage, setFollowingPage] = useState(INIT_PAGE);
+    const [showMore, setShowMore] = useState(false);
+    const [apiFollCalled, setApiFollCalled] = useState(false);
+    const [initialFollowingUsers, setInitialFollowingUsers] = useState([]);
+    const [allFollowingUsers, setAllFollowingUsers] = useState([]);
+    const [followingUsers, setFollowingUsers] = useState([]);
+
     useEffect(() => {
-        if (initialSuggestedUsers.length === 0) {
+        if (initialSuggestedUsers.length === 0 ) {
             userService
-                .getSuggested({ page, perPage: perPage })
+                .getSuggested({ page: pageSuggested, perPage: perPage })
                 .then((data) => {
                     setInitialSuggestedUsers(data);
                     setSuggestedUsers(data);
@@ -40,7 +49,7 @@ function Sidebar() {
                 .catch((error) => console.log(error));
         } else if (!apiCalled && showAll) {
             userService
-                .getSuggested({ page, perPage: perPage })
+                .getSuggested({ page: pageSuggested, perPage: perPage })
                 .then((data) => {
                     setAllInitialSuggestedUsers(data);
                     setSuggestedUsers(data);
@@ -52,7 +61,35 @@ function Sidebar() {
         } else if (showAll) {
             setSuggestedUsers(allSuggestedUsers);
         }
-    }, [allSuggestedUsers, apiCalled, initialSuggestedUsers, page, perPage, showAll]);
+    }, [allSuggestedUsers, apiCalled, initialSuggestedUsers, pageSuggested, perPage, showAll]);
+
+    useEffect(() => {
+        if (!apiFollCalled && !showMore) {
+            userService
+                .getFollowingList({ page: followingPage })
+                .then((data) => {
+                    if (data.length === 0) {
+                        setAllFollowingUsers([...followingUsers]);
+                        setApiFollCalled(true);
+                        setShowMore(true);
+                    } else {
+                        if (initialFollowingUsers.length < MAX_INITIAL_FOLLOWING_USERS) {
+                            setInitialFollowingUsers((prev) => [...prev, ...data]);
+                            setFollowingUsers((prev) => [...prev, ...data]);
+                        } else {
+                            setFollowingUsers((prev) => [...prev, ...data]);
+                        }
+                    }
+                })
+                .catch((error) => console.log(error));
+        } else if (showMore) {
+            setFollowingUsers(initialFollowingUsers);
+        } else if (!showMore) {
+            setFollowingUsers(allFollowingUsers);
+            setShowMore(true)
+        }
+        // eslint-disable-next-line react-hooks/exhaustive-deps
+    }, [followingPage]);
 
     // const handleSeeAll= useCallback(()=>{
     //     //for optimize later
@@ -65,6 +102,15 @@ function Sidebar() {
         setPerPage(PER_PAGE);
         setShowAll(false);
     };
+
+    const handleSeeMore = () => {
+        setFollowingPage(followingPage + 1);
+    };
+    const handleSeeLessF = () => {
+        setShowMore(false);
+        setFollowingUsers(initialFollowingUsers);
+    };
+
     return (
         <div className={cx('sidebar-container')}>
             <aside className={cx('wrapper')}>
@@ -79,13 +125,21 @@ function Sidebar() {
                     <MenuItem title="Live" to="/live" icon={<LiveIcon />} activeIcon={<LiveIconActive />} />
                 </Menu>
                 <SuggestedAccount
+                    type="Suggested"
                     lable="Sugggested accounts"
                     data={suggestedUsers}
                     onSeeAll={handleSeeAll}
                     onSeeLess={handleSeeLess}
                     isShowAll={showAll}
                 />
-                <SuggestedAccount lable="Following accounts" />
+                <SuggestedAccount
+                    type="Following"
+                    lable="Following accounts"
+                    data={followingUsers}
+                    onSeeMore={handleSeeMore}
+                    onSeeLessF={handleSeeLessF}
+                    isShowAllF={showMore}
+                />
                 <ReferenceArea />
             </aside>
         </div>

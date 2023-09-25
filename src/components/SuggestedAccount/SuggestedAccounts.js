@@ -6,17 +6,34 @@ import AccountItem from './AccountItem';
 
 const cx = classNames.bind(styles);
 
-function SuggestedAccounts({ lable, data = [], onSeeAll, onSeeLess, isShowAll = false }) {
+function SuggestedAccounts({
+    type,
+    lable,
+    data= [],
+    onSeeAll,
+    onSeeLess,
+    isShowAll = false,
+    onSeeMore,
+    onSeeLessF,
+    isShowAllF = false,
+}) {
     return (
         <div className={cx('wrapper')}>
-            {console.log('render')}
             <p className={cx('lable')}>{lable}</p>
-            {data.map((account) => (
-                <AccountItem key={account.id} data={account} />
-            ))}
-            <p className={cx('more-btn')} onClick={!isShowAll ? onSeeAll : onSeeLess}>
-                {!isShowAll ? 'See all' : 'See less'}
-            </p>
+            {
+                data.map((account,index) => (
+                <AccountItem key={index} data={account} />
+            ))
+            }
+            {type === 'Suggested' ? (
+                <p className={cx('more-btn')} onClick={!isShowAll ? onSeeAll : onSeeLess}>
+                    {!isShowAll ? 'See all' : 'See less'}
+                </p>
+            ) : (
+                <p className={cx('more-btn')} onClick={!isShowAllF ? onSeeMore : onSeeLessF}>
+                    {!isShowAllF ? 'See more' : 'See less'}
+                </p>
+            )}
         </div>
     );
 }

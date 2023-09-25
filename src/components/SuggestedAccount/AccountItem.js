@@ -3,6 +3,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faCheckCircle } from '@fortawesome/free-solid-svg-icons';
 import Tippy from '@tippyjs/react/headless';
 import PropTypes from 'prop-types';
+import { Link } from 'react-router-dom';
 
 import styles from './SuggestedAccount.module.scss';
 import Image from '~/components/Image';
@@ -14,19 +15,21 @@ const cx = classNames.bind(styles);
 function AccountItem({ data }) {
     const renderPreview = (attrs) => {
         return (
-            <div tabIndex="-1" {...attrs}>
+            <Link to={`/:${data.nickname}`}>
+                <div tabIndex="-1" {...attrs}>
                 <PopperWrapper>
                     <div className={cx('preview')}>
                         <AccountPreview data={data} />
                     </div>
                 </PopperWrapper>
             </div>
+            </Link>
         );
     };
     return (
         <div>
             <Tippy interactive delay={[500, 0]} offset={[-20, 0]} placement="bottom" render={renderPreview}>
-                <div className={cx('account-item')}>
+                <Link to={`/:${data.nickname}`} className={cx('account-item')}>
                     <Image className={cx('avatar')} src={data.avatar} alt={data.nickname} />
                     <div className={cx('item-info')}>
                         <p className={cx('nickname')}>
@@ -37,7 +40,7 @@ function AccountItem({ data }) {
                             data.last_name
                         }`}</p>
                     </div>
-                </div>
+                </Link>
             </Tippy>
         </div>
     );

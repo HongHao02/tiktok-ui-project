@@ -27,56 +27,56 @@ const refIntroductions = [
 const refFeatures = [
     {
         title: 'Tiktok for Good',
-        href: 'https://www.tiktok.com/about?lang=en',
+        href: 'https://www.tiktok.com/for-good',
     },
     {
         title: 'Advertise',
-        href: 'https://newsroom.tiktok.com/en-us/',
+        href: 'https://www.tiktok.com/business/vi?attr_medium=tt_official_site_guidance&attr_source=tt_official_site&refer=tiktok_web&tt4b_lang_redirect=1',
     },
     {
         title: 'Deverlopers',
-        href: 'https://www.tiktok.com/about/contact?lang=en',
+        href: 'https://developers.tiktok.com/?refer=tiktok_web',
     },
     {
         title: 'Transparency',
-        href: 'https://careers.tiktok.com/',
+        href: 'https://www.tiktok.com/transparency/vi-vn/',
     },
     {
         title: 'Tiktok Rewards',
-        href: 'https://www.tiktok.com/about/contact?lang=en',
+        href: 'https://www.tiktok.com/tiktok-rewards/eligibility/',
     },
     {
         title: 'Tiktok Embeds',
-        href: 'https://careers.tiktok.com/',
+        href: 'https://www.tiktok.com/embed',
     },
     
 ];
 const refHelp = [
     {
         title: 'Help',
-        href: 'https://www.tiktok.com/about?lang=en',
+        href: 'https://support.tiktok.com/en',
     },
     {
         title: 'Safety',
-        href: 'https://newsroom.tiktok.com/en-us/',
+        href: 'https://www.tiktok.com/safety/en/',
     },
     {
         title: 'Terms',
-        href: 'https://www.tiktok.com/about/contact?lang=en',
+        href: 'https://www.tiktok.com/legal/page/row/terms-of-service/en',
     },
     {
         title: 'Privacy',
-        href: 'https://careers.tiktok.com/',
+        href: 'https://www.tiktok.com/legal/page/row/privacy-policy/en',
     },
     {
         title: 'Creator Portal',
-        href: 'https://www.tiktok.com/about/contact?lang=en',
+        href: 'https://www.tiktok.com/creators/creator-portal/en-us/',
     },
 ];
 const refComunication = [
     {
         title: 'Community Guidelines',
-        href: 'https://www.tiktok.com/about?lang=en',
+        href: 'https://www.tiktok.com/community-guidelines/en/',
     },
 ];
 
