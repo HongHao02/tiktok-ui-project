@@ -56,6 +56,22 @@
 .btn-primary {
     width: 100%;
     background-color: rgba(22, 24, 35, 0.06);
+
+    &.loading {
+        background-color: var(--primary);
+        pointer-events: none;
+        .spin {
+            animation: spin 1s linear infinite;
+        }
+    }
+}
+@keyframes spin {
+    0% {
+        transform: rotate(0deg);
+    }
+    100% {
+        transform: rotate(360deg);
+    }
 }
 .text {
     color: rgba(22, 24, 35, 0.75);

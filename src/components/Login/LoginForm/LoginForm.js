@@ -7,6 +7,7 @@ import styles from './LoginForm.module.scss';
 import Button from '~/components/Button';
 import * as authService from '~/services/authService';
 import { UserContext } from '~/Context';
+import { faSpinner } from '@fortawesome/free-solid-svg-icons';
 
 const cx = classNames.bind(styles);
 
@@ -22,6 +23,7 @@ function LoginForm() {
     const [hidePasswd, setHidePasswd] = useState(false);
     const [loginSuccess, setLoginSuccess] = useState(false);
     const [isLogin, setIsLogin] = useState(true);
+    const [isLoading, setIsLoading] = useState(false);
 
     const handleChangeIcon = () => {
         setHidePasswd(!hidePasswd);
@@ -44,28 +46,32 @@ function LoginForm() {
         }
     }, [email, passwd]);
 
-    const handleLogin = (e) => {
+    const handleLogin = async (e) => {
         e.preventDefault();
-        authService
-            .login({ email: email, password: passwd })
-            .then((res) => {
-                if (res != null) {
-                    setCurrentUser(res);
-                    // Save user token
-                    console.log('token ', res.meta.token);
-                    localStorage.setItem('token', res.meta.token);
-                    localStorage.setItem('nickname', res.data.nickname);
-                    userContext.handleChangeNickName(res.data.nickname);
-                    userContext.handleChangeToken(res.meta.token);
-                    userContext.handleChangeCurrentUser(res.data);
-                    setLoginSuccess(false);
-                }
-            })
-            .catch((error) => {
-                console.error('Error when login ', error);
-                setLoginSuccess(true); // Set login success to true on error
-            });
+        setIsLoading(true); // set isLoading by true --> Login stated
+
+        try {
+            const res = await authService.login({ email: email, password: passwd });
+            if (res != null) {
+                setCurrentUser(res);
+                // Lưu token của người dùng
+                console.log('token ', res.meta.token);
+                localStorage.setItem('token', res.meta.token);
+                localStorage.setItem('nickname', res.data.nickname);
+                userContext.handleChangeNickName(res.data.nickname);
+                userContext.handleChangeToken(res.meta.token);
+                userContext.handleChangeCurrentUser(res.data);
+                userContext.handleChangeLoginSuccess(true);
+                setLoginSuccess(false);
+            }
+        } catch (error) {
+            console.error('There are some error when login ', error);
+            setLoginSuccess(true); // set isLogin by true when error occur
+        } finally {
+            setIsLoading(false); // set isLoading become false after API called finish or handle error
+        }
     };
+
     return (
         <div className={cx('item')}>
             <span className={cx('title')}>Log in by email/name/username</span>
@@ -101,8 +107,13 @@ function LoginForm() {
                         Forgot password
                     </a>
                 </div>
-                <Button to="/" disable={isLogin} className={cx('btn-primary')} onClick={handleLogin}>
-                    Log in
+                <Button
+                    to="/"
+                    disable={isLogin}
+                    className={cx('btn-primary', { loading: isLoading })}
+                    onClick={handleLogin}
+                >
+                    {isLoading ? <FontAwesomeIcon icon={faSpinner} spin /> : 'Log in'}
                 </Button>
             </form>
         </div>

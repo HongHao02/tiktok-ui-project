@@ -55,7 +55,7 @@ function Header() {
                 userContext.handleChangeNickName('');
                 userContext.handleChangeToken('');
                 userContext.handleChangeCurrentUser(null);
-
+                userContext.handleChangeLogoutSuccess(true);
                 handleLogout();
                 break;
             default:

@@ -1,0 +1,38 @@
+//notify
+.notify-wrapper {
+    left: 0;
+    pointer-events: none;
+    position: fixed;
+    right: 0;
+    text-align: center;
+    top: 16px;
+    user-select: none;
+    -ms-user-select: none;
+    -moz-user-select: none;
+    -webkit-user-select: none;
+    z-index: 999999999;
+}
+.notify {
+    -webkit-animation: Notify_showEffect 0.3s;
+    animation: Notify_showEffect 0.3s;
+    background-color: rgba(84, 84, 84, 0.92);
+    color: #fff;
+    display: inline-block;
+    font-size: 1.4rem;
+    font-weight: 600;
+    min-width: 300px;
+    padding: 10px 8px;
+    width: 50%;
+}
+@keyframes Notify_showEffect {
+    0% {
+        opacity: 0;
+        -webkit-transform: translateY(-100%);
+        transform: translateY(-100%);
+    }
+    100% {
+        opacity: 1;
+        -webkit-transform: translateY(0);
+        transform: translateY(0);
+    }
+}

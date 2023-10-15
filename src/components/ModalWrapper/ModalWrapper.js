@@ -10,7 +10,6 @@ function ModalWrapper({ children, title = '', isShowBack = false, onHide = () =>
     return (
         <div className={cx('wrapper')}>
             <div className={cx('overlay')}></div>
-
             <PopperWrapper className={cx('content', 'modal-wrapper')}>
                 {isShowBack && (
                     <button className={cx('back-btn')} onClick={onBack}>

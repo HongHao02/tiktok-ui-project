@@ -1,5 +1,7 @@
 import { useState, createContext, useEffect } from 'react';
+import classNames from 'classnames/bind';
 
+import styles from './UserContextProvider.module.scss';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import {
     faEarthAsia,
@@ -13,6 +15,7 @@ import {
 } from '@fortawesome/free-solid-svg-icons';
 import config from '~/config';
 
+const cx = classNames.bind(styles);
 const UserContext = createContext();
 const MENU_ITEMS = [
     {
@@ -97,6 +100,9 @@ function UserContextProvider({ children }) {
     const [currentUser, setCurrentUser] = useState(null);
     const [currentMenu, setCurrentMenu] = useState(MENU_ITEMS);
 
+    const [loginSuccess, setLoginSuccess] = useState(false);
+    const [logoutSuccess, setLogoutSuccess] = useState(false);
+
     useEffect(() => {
         if (!token) {
             setCurrentMenu(MENU_ITEMS);
@@ -104,6 +110,22 @@ function UserContextProvider({ children }) {
             setCurrentMenu(USER_MENU);
         }
     }, [nickname, token, currentUser, currentMenu]);
+
+    useEffect(() => {
+        const timer = setTimeout(() => {
+            setLoginSuccess(false);
+        },3000);
+
+        return () => clearTimeout(timer);
+    }, [loginSuccess]);
+
+    useEffect(() => {
+        const timer = setTimeout(() => {
+            setLogoutSuccess(false);
+        },3000);
+
+        return () => clearTimeout(timer);
+    }, [logoutSuccess]);
     const handleChangeToken = (token) => {
         setToken(token);
     };
@@ -116,6 +138,12 @@ function UserContextProvider({ children }) {
     const handleChangeCurrentMenu = (currentMenu) => {
         setCurrentMenu(currentMenu);
     };
+    const handleChangeLoginSuccess = (state) => {
+        setLoginSuccess(state);
+    };
+    const handleChangeLogoutSuccess = (state) => {
+        setLogoutSuccess(state);
+    };
     const value = {
         MENU_ITEMS,
         USER_MENU,
@@ -123,12 +151,30 @@ function UserContextProvider({ children }) {
         nickname,
         currentUser,
         currentMenu,
+        loginSuccess,
+        logoutSuccess,
         handleChangeToken,
         handleChangeNickName,
         handleChangeCurrentUser,
         handleChangeCurrentMenu,
+        handleChangeLoginSuccess,
+        handleChangeLogoutSuccess,
     };
-    return <UserContext.Provider value={value}>{children}</UserContext.Provider>;
+    return (
+        <UserContext.Provider value={value}>
+            {loginSuccess && (
+                <div className={cx('notify-wrapper')}>
+                    <p className={cx('notify')}>Login Success</p>
+                </div>
+            )}
+            {logoutSuccess && (
+                <div className={cx('notify-wrapper')}>
+                    <p className={cx('notify')}>Logout Success</p>
+                </div>
+            )}
+            {children}
+        </UserContext.Provider>
+    );
 }
 
 export default UserContextProvider;
