@@ -1,0 +1,251 @@
+.wrapper {
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    inset: 0;
+    justify-content: center;
+    position: fixed;
+    z-index: 1001;
+}
+.overlay {
+    -webkit-animation: ModalWrapper_show-fade 0.5s cubic-bezier(0.075, 0.82, 0.165, 1) forwards;
+    animation: ModalWrapper_show-fade 0.5s cubic-bezier(0.075, 0.82, 0.165, 1) forwards;
+    background-color: rgba(0, 0, 0, 0.5);
+    inset: inherit;
+    opacity: 0;
+    position: absolute;
+}
+
+.login-info {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: var(--background-gray-color-03);
+    width: 500px;
+    height: 50px;
+    padding: 5px;
+    margin: 10px auto;
+    z-index: 2000;
+}
+
+@-webkit-keyframes ModalWrapper_show-fade {
+    0% {
+        opacity: 0;
+    }
+
+    to {
+        opacity: 1;
+    }
+}
+
+@keyframes ModalWrapper_show-fade {
+    0% {
+        opacity: 0;
+    }
+
+    to {
+        opacity: 1;
+    }
+}
+
+@-webkit-keyframes ModalWrapper_hide-fade {
+    0% {
+        opacity: 1;
+    }
+
+    to {
+        opacity: 0;
+    }
+}
+
+@keyframes ModalWrapper_hide-fade {
+    0% {
+        opacity: 1;
+    }
+
+    to {
+        opacity: 0;
+    }
+}
+
+@-webkit-keyframes ModalWrapper_show-scale {
+    0% {
+        opacity: 0;
+        -webkit-transform: scale(0.6);
+        transform: scale(0.6);
+    }
+
+    to {
+        opacity: 1;
+        -webkit-transform: scale(1);
+        transform: scale(1);
+    }
+}
+
+@keyframes ModalWrapper_show-scale {
+    0% {
+        opacity: 0;
+        -webkit-transform: scale(0.6);
+        transform: scale(0.6);
+    }
+
+    to {
+        opacity: 1;
+        -webkit-transform: scale(1);
+        transform: scale(1);
+    }
+}
+
+@-webkit-keyframes ModalWrapper_hide-scale {
+    0% {
+        opacity: 1;
+        -webkit-transform: scale(1);
+        transform: scale(1);
+    }
+
+    to {
+        opacity: 0.2;
+        -webkit-transform: scale(0);
+        transform: scale(0);
+    }
+}
+
+@keyframes ModalWrapper_hide-scale {
+    0% {
+        opacity: 1;
+        -webkit-transform: scale(1);
+        transform: scale(1);
+    }
+
+    to {
+        opacity: 0.2;
+        -webkit-transform: scale(0);
+        transform: scale(0);
+    }
+}
+//Use `@mixin <name> {...}` for similar part of css rule and use `@include <mixin name>` for using
+@mixin hide-fade {
+    -webkit-animation: ModalWrapper_hide-fade 0.35s cubic-bezier(0.65, 0, 0.35, 1);
+    animation: ModalWrapper_hide-fade 0.35s cubic-bezier(0.65, 0, 0.35, 1);
+}
+
+@mixin hide-scale {
+    -webkit-animation-fill-mode: backwards;
+    animation-fill-mode: backwards;
+    -webkit-animation-name: ModalWrapper_hide-scale;
+    animation-name: ModalWrapper_hide-scale;
+}
+
+@mixin show-fade {
+    -webkit-animation: ModalWrapper_show-fade 0.5s cubic-bezier(0.075, 0.82, 0.165, 1) forwards;
+    animation: ModalWrapper_show-fade 0.5s cubic-bezier(0.075, 0.82, 0.165, 1) forwards;
+}
+
+//content
+body .modal-wrapper {
+    --wrapper-width: 484px;
+    --min-width-space: 375px;
+    display: flex;
+    flex-direction: column;
+    font-size: 1.5rem;
+    height: 80%;
+    max-height: 694px;
+    max-width: var(--wrapper-width);
+    padding-top: 48px;
+}
+
+.content {
+    -webkit-animation: ModalWrapper_show-scale 0.5s cubic-bezier(0.075, 0.82, 0.165, 1) forwards;
+    animation: ModalWrapper_show-scale 0.5s cubic-bezier(0.075, 0.82, 0.165, 1) forwards;
+    opacity: 0;
+    padding: 0;
+    position: relative;
+}
+.back-btn,
+.close-btn {
+    color: var(--text-color);
+    position: absolute;
+    top: 16px;
+}
+.back-btn {
+    background-color: transparent;
+    font-size: 24px;
+    left: 16px;
+    top: 24px;
+}
+.close-btn {
+    align-items: center;
+    background-color: var(--background-gray-color-03);
+    border-radius: 50%;
+    display: flex;
+    font-size: 25px;
+    height: 41px;
+    justify-content: center;
+    right: 16px;
+    width: 41px;
+}
+//--body
+.body {
+    flex: 1 1;
+    overflow-x: hidden;
+    overflow-y: overlay;
+    padding: 0 52px;
+
+    .item {
+        font-size: inherit;
+        height: 44px;
+        justify-content: flex-start;
+        margin-bottom: 16px;
+        margin-left: 0;
+        padding: 0 12px;
+        width: 100%;
+    }
+}
+
+.title {
+    font-size: 3.2rem;
+    margin: 16px 0;
+    text-align: center;
+}
+//policy
+.policy {
+    width: 100%;
+    display: flex;
+    -webkit-box-align: center;
+    align-items: center;
+    -webkit-box-pack: center;
+    justify-content: center;
+    background: rgb(255, 255, 255);
+    border-bottom: 1px solid rgba(22, 24, 35, 0.12);
+    border-top-color: rgba(22, 24, 35, 0.12);
+    border-right-color: rgba(22, 24, 35, 0.12);
+    border-left-color: rgba(22, 24, 35, 0.12);
+    padding: 16px 52px;
+    margin-bottom: unset;
+
+    .content {
+        color: rgba(22, 24, 35, 0.5);
+        font-family: TikTokFont;
+        font-size: 12px;
+        line-height: 15px;
+        text-align: center;
+    }
+}
+
+//footer
+.footer {
+    align-items: center;
+    border-top: 1px solid black;
+    display: flex;
+    flex: 0 0 64px;
+    justify-content: center;
+    min-width: var(--wrapper-width);
+    white-space: nowrap;
+}
+//--register
+.register {
+    color: var(--primary);
+    cursor: pointer;
+    font-weight: 600;
+    margin-left: 4px;
+}

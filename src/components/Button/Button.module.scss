@@ -25,10 +25,11 @@
         opacity: 0.5;
     }
 }
-.icon + .title, .title + .icon{
+.icon + .title,
+.title + .icon {
     margin-left: 8px;
 }
-.icon{
+.icon {
     //to enable set width
     display: inline-block;
     text-align: center;
@@ -53,6 +54,7 @@
         background: linear-gradient(0deg, rgba(0, 0, 0, 0.06), rgba(0, 0, 0, 0.06)), #fe2c55;
     }
 }
+
 .outline {
     color: var(--primary);
     //currentColor is var(--primary)
@@ -63,12 +65,34 @@
         background-color: var(--tux-colorPrimary-opacity-12);
     }
 }
+.link {
+    border-color: #1618231f;
+    border-radius: 2px;
+    min-width: 110px;
+    padding: 0 16px;
+
+    //if we have class link contain class title the css rule will be applied
+    .title {
+        flex: 1 1;
+        margin: 0;
+    }
+    .icon {
+        width: 20px;
+    }
+    + .wrapper {
+        margin-left: 0px;
+    }
+    &:hover {
+        background-color: var(--background-gray-color-03);
+        border-color: #d0d1d3;
+    }
+}
+
 .text {
     &:hover {
         text-decoration: underline;
     }
 }
-
 
 //Disable
 
@@ -81,4 +105,3 @@
     padding: 14px 16px;
     min-width: 140px;
 }
-

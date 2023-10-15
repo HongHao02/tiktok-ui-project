@@ -1,5 +1,5 @@
 import classNames from 'classnames/bind';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import Tippy from '@tippyjs/react/headless';
 import PropTypes from 'prop-types';
 
@@ -15,7 +15,13 @@ const defaultFn = () => {};
 function Menu({ children, items = [], hideOnClick = false, onChange = defaultFn }) {
     const [history, setHistory] = useState([{ data: items }]);
     const current = history[history.length - 1];
-    
+
+    useEffect(() => {
+        if (items.length !== history[0].length) {
+            setHistory([{ data: items }]);
+        }
+        // eslint-disable-next-line react-hooks/exhaustive-deps
+    }, [items]);
     const renderItems = () => {
         return current.data.map((item, index) => {
             const isParent = !!item.children; //if item doesn't have children isParent is `undifined`

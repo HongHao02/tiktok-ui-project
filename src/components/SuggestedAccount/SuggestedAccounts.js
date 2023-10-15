@@ -9,7 +9,7 @@ const cx = classNames.bind(styles);
 function SuggestedAccounts({
     type,
     lable,
-    data= [],
+    data = [],
     onSeeAll,
     onSeeLess,
     isShowAll = false,
@@ -20,11 +20,9 @@ function SuggestedAccounts({
     return (
         <div className={cx('wrapper')}>
             <p className={cx('lable')}>{lable}</p>
-            {
-                data.map((account,index) => (
-                <AccountItem key={index} data={account} />
-            ))
-            }
+            {data.length === 0 && type !== 'Suggested'
+                ? <span className={cx('description')}>Account you following will be here</span>
+                : data.map((account, index) => <AccountItem key={index} data={account} />)}
             {type === 'Suggested' ? (
                 <p className={cx('more-btn')} onClick={!isShowAll ? onSeeAll : onSeeLess}>
                     {!isShowAll ? 'See all' : 'See less'}

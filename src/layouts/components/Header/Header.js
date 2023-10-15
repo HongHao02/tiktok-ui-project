@@ -1,16 +1,7 @@
 import classNames from 'classnames/bind';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import {
-    faEllipsisVertical,
-    faEarthAsia,
-    faCircleQuestion,
-    faKeyboard,
-    faUser,
-    faBookBookmark,
-    faGear,
-    faCoins,
-    faSignOut,
-} from '@fortawesome/free-solid-svg-icons';
+import { faEllipsisVertical } from '@fortawesome/free-solid-svg-icons';
+import { useContext, useEffect, useState } from 'react';
 import Tippy from '@tippyjs/react';
 import 'tippy.js/dist/tippy.css'; // optional
 import { Link } from 'react-router-dom';
@@ -23,98 +14,66 @@ import { UploadIcon, MessageIcon, InboxIcon } from '~/components/Icons';
 import Image from '~/components/Image';
 import Search from '~/layouts/components/Search';
 import config from '~/config';
+import * as authService from '~/services/authService';
+import { UserContext } from '~/Context';
+import DefaultLogin from '~/components/Login/DefaultLogin';
 
 const cx = classNames.bind(styles);
-const MENU_ITEMS = [
-    {
-        icon: <FontAwesomeIcon icon={faEarthAsia} />,
-        title: 'English',
-        children: {
-            title: 'Language',
-            data: [
-                {
-                    code: 'en',
-                    title: 'English',
-                    children: {
-                        title: 'English 1',
-                        data: [
-                            {
-                                type: 'language',
-                                code: 'en1',
-                                title: 'English 1',
-                            },
-                            {
-                                type: 'language',
-                                code: 'en2',
-                                title: 'English 2',
-                            },
-                        ],
-                    },
-                },
-                {
-                    code: 'vi',
-                    title: 'Tiếng Việt',
-                },
-                {
-                    code: 'ko',
-                    title: 'Korean',
-                },
-            ],
-        },
-    },
-    {
-        icon: <FontAwesomeIcon icon={faCircleQuestion} />,
-        title: 'Feedback and help',
-        to: '/feedback',
-    },
-    {
-        icon: <FontAwesomeIcon icon={faKeyboard} />,
-        title: 'Keyboard Shortcuts',
-    },
-];
 
-const USER_MENU = [
-    {
-        icon: <FontAwesomeIcon icon={faUser} />,
-        title: 'View profile',
-        to: '/hoaa',
-    },
-    {
-        icon: <FontAwesomeIcon icon={faBookBookmark} />,
-        title: 'Favorites',
-        to: '/favorites',
-    },
-    {
-        icon: <FontAwesomeIcon icon={faCoins} />,
-        title: 'Get conins',
-        to: '/coin',
-    },
-    {
-        icon: <FontAwesomeIcon icon={faGear} />,
-        title: 'Settings',
-        to: '/setting',
-    },
-    ...MENU_ITEMS,
-    {
-        icon: <FontAwesomeIcon icon={faSignOut} />,
-        title: 'Log out',
-        to: '/logout',
-        separate: true,
-    },
-];
 function Header() {
+    const userContext = useContext(UserContext);
+    const [isLogin, setIsLogin] = useState(false);
+
+    const [currentUser, setCurrentUser] = useState(userContext.currentUser);
+
+    console.log('currentUser in Header ', currentUser);
+
+    useEffect(() => {
+        if (userContext.nickname != null && userContext.token != null) {
+            console.log('find currentUser');
+            authService
+                .getCurrentUser({ token: userContext.token })
+                .then((res) => {
+                    setCurrentUser(res);
+                })
+                .catch((e) => {
+                    console.log('Error when set current user ', e);
+                });
+        }
+        // eslint-disable-next-line react-hooks/exhaustive-deps
+    }, [userContext.nickname, userContext.token]);
     const handleChangeMenu = (menuItem) => {
         // console.log(memuItem);
-        switch (menuItem.type) {
+        switch (menuItem.title) {
             case 'language':
-                console.log(menuItem);
+                console.log('MenuItem ', menuItem);
+                break;
+            case 'Log out':
+                console.log('MenuItem ', menuItem);
+                localStorage.removeItem('token');
+                localStorage.removeItem('nickname');
+                userContext.handleChangeNickName('');
+                userContext.handleChangeToken('');
+                userContext.handleChangeCurrentUser(null);
+
+                handleLogout();
                 break;
             default:
             //
         }
     };
 
-    let currentUser = true;
+    const handleLogin = () => {
+        setIsLogin(true);
+    };
+    const handleLogout = () => {
+        setIsLogin(false);
+        setCurrentUser(null);
+    };
+    const hanlleHide = () => {
+        setIsLogin(false);
+    };
+
     return (
         <header className={cx('wrapper')}>
             <div className={cx('inner')}>
@@ -151,14 +110,17 @@ function Header() {
                             <Button text>Upload</Button>
                             {/*for button with icon*/}
                             {/* <Button outline leftIcon={<FontAwesomeIcon icon={faSignIn} />}>Log in</Button> */}
-                            <Button primary>Log in</Button>
+                            <Button primary onClick={handleLogin}>
+                                Log in
+                            </Button>
+                            {isLogin && <DefaultLogin onHide={hanlleHide} />}
                         </>
                     )}
-                    <Menu items={currentUser ? USER_MENU : MENU_ITEMS} onChange={handleChangeMenu}>
+                    <Menu items={userContext.currentMenu} onChange={handleChangeMenu}>
                         {currentUser ? (
                             <Image
                                 className={cx('user-avatar')}
-                                src=""
+                                src={currentUser.avatar}
                                 alt="no-avatar"
                                 fallback="https://p77-sign-va.tiktokcdn.com/tos-maliva-avt-0068/7d95aabe6b6a3ca5fcc1980e34f3cd87~c5_100x100.jpeg?x-expires=1693256400&x-signature=HC%2BOMRqLcE9Fi6SquMtOtp7tt6U%3D"
                             />

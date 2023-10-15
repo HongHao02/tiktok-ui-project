@@ -2,7 +2,8 @@ import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import { Fragment } from 'react';
 
 import { publicRoutes } from './routes';
-import  DefaultLayout  from '~/layouts';
+import DefaultLayout from '~/layouts';
+import UserContextProvider from '~/Context';
 
 function App() {
     return (
@@ -23,9 +24,11 @@ function App() {
                                 key={index}
                                 path={route.path}
                                 element={
-                                    <Layout>
-                                        <Page />
-                                    </Layout>
+                                    <UserContextProvider>
+                                        <Layout>
+                                            <Page />
+                                        </Layout>
+                                    </UserContextProvider>
                                 }
                             ></Route>
                         );

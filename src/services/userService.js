@@ -15,8 +15,9 @@ export const getSuggested = async ({ page, perPage }) => {
     }
 };
 
-export const getFollowingList = async ({ page }) => {
+export const getFollowingList = async ({ page, token }) => {
     try {
+        request.updateToken(token);
         const res = await request.get(`me/followings`, {
             params: {
                 page,

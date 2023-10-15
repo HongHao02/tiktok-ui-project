@@ -4,17 +4,45 @@ import axios from 'axios';
 // console.log(process.env)
 //process.env.NODE_EVN: "development" use for development environment
 
-const fakeToken =
-    'eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJodHRwOlwvXC90aWt0b2suZnVsbHN0YWNrLmVkdS52blwvYXBpXC9hdXRoXC9yZWdpc3RlciIsImlhdCI6MTY5NDk3MzE5MSwiZXhwIjoxNjk3NTY1MTkxLCJuYmYiOjE2OTQ5NzMxOTEsImp0aSI6IlVYSERBSlk2TmZ4Wk5LYjkiLCJzdWIiOjYyNTMsInBydiI6IjIzYmQ1Yzg5NDlmNjAwYWRiMzllNzAxYzQwMDg3MmRiN2E1OTc2ZjcifQ.glczS9DB6YKKfzBjqVv9mYuuNkvv9NXtIMEZatxVDdo';
+//localStorage
+const isLoggedIn = !!localStorage.getItem('token');
+let token = '';
+if (isLoggedIn) {
+    token = localStorage.getItem('token');
+    console.log('token ', token);
+}
+
 const httpRequest = axios.create({
     baseURL: process.env.REACT_APP_BASE_URL,
     headers: {
-        Authorization: `Bearer ${fakeToken}`,
+        Authorization: `Bearer ${token}`,
     },
 });
+
+export const updateToken = (newToken) => {
+    token = newToken;
+    httpRequest.defaults.headers.Authorization = `Bearer ${token}`;
+    console.log('bearer ', httpRequest.defaults.headers.Authorization);
+};
 
 export const get = async (path, options = {}) => {
     const response = await httpRequest.get(path, options);
     return response.data;
 };
+
+export const post = async (path, options = {}) => {
+    const response = await httpRequest.post(path, options);
+    return response.data;
+};
+
+//Listen event when localStorage change token
+
+window.addEventListener('storage', (e) => {
+    console.log('TOKEN CHANGE...');
+    if (e.key === 'token') {
+        console.log('update Token ', e.newValue);
+        updateToken(e.newValue);
+    }
+});
+
 export default httpRequest;

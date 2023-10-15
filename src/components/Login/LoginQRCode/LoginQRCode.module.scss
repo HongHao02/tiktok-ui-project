@@ -1,0 +1,31 @@
+.item {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+}
+.title {
+    font-weight: 700;
+    margin-bottom: 8px;
+}
+//content
+.content {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    border: 1px solid var(--background-gray-color-12);
+    margin: 9px 0;
+
+    border-radius: 8px;
+    border: 1px solid var(--border-color-default);
+    min-height: 208px;
+}
+
+.img {
+    width: 170px;
+    height: 170px;
+}
+//step
+.step {
+    margin-top: 10px;
+}

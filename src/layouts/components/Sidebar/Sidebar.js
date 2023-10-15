@@ -1,5 +1,5 @@
 import classNames from 'classnames/bind';
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useContext } from 'react';
 
 import Menu, { MenuItem } from './Menu';
 import styles from './Sidebar.module.scss';
@@ -14,6 +14,7 @@ import {
 } from '~/components/Icons';
 import * as userService from '~/services/userService';
 import ReferenceArea from '~/components/ReferenceArea';
+import { UserContext } from '~/Context';
 
 const cx = classNames.bind(styles);
 
@@ -23,6 +24,7 @@ const SEE_ALL_PER_PAGE = 20;
 const MAX_INITIAL_FOLLOWING_USERS = 5;
 
 function Sidebar() {
+    const userContex= useContext(UserContext)
     const [pageSuggested, setPageSuggested] = useState(INIT_PAGE);
     const [perPage, setPerPage] = useState(PER_PAGE);
     const [showAll, setShowAll] = useState(false);
@@ -61,35 +63,45 @@ function Sidebar() {
         } else if (showAll) {
             setSuggestedUsers(allSuggestedUsers);
         }
-    }, [allSuggestedUsers, apiCalled, initialSuggestedUsers, pageSuggested, perPage, showAll]);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+    }, [ perPage, showAll]);
 
     useEffect(() => {
-        if (!apiFollCalled && !showMore) {
-            userService
-                .getFollowingList({ page: followingPage })
-                .then((data) => {
-                    if (data.length === 0) {
-                        setAllFollowingUsers([...followingUsers]);
-                        setApiFollCalled(true);
-                        setShowMore(true);
-                    } else {
-                        if (initialFollowingUsers.length < MAX_INITIAL_FOLLOWING_USERS) {
-                            setInitialFollowingUsers((prev) => [...prev, ...data]);
-                            setFollowingUsers((prev) => [...prev, ...data]);
+        if(userContex.token){
+            if (!apiFollCalled && !showMore) {
+                userService
+                    .getFollowingList({ page: followingPage, token: userContex.token  })
+                    .then((data) => {
+                        if (data.length === 0) {
+                            setAllFollowingUsers([...followingUsers]);
+                            setApiFollCalled(true);
+                            setShowMore(true);
                         } else {
-                            setFollowingUsers((prev) => [...prev, ...data]);
+                            if (initialFollowingUsers.length < MAX_INITIAL_FOLLOWING_USERS) {
+                                setInitialFollowingUsers((prev) => [...prev, ...data]);
+                                setFollowingUsers((prev) => [...prev, ...data]);
+                            } else {
+                                setFollowingUsers((prev) => [...prev, ...data]);
+                            }
                         }
-                    }
-                })
-                .catch((error) => console.log(error));
-        } else if (showMore) {
-            setFollowingUsers(initialFollowingUsers);
-        } else if (!showMore) {
-            setFollowingUsers(allFollowingUsers);
-            setShowMore(true)
+                    })
+                    .catch((error) => console.log(error));
+            } else if (showMore) {
+                setFollowingUsers(initialFollowingUsers);
+            } else if (!showMore) {
+                setFollowingUsers(allFollowingUsers);
+                setShowMore(true)
+            }
+        }else{
+            setFollowingPage(INIT_PAGE)
+            setFollowingUsers([])
+            setInitialFollowingUsers([])
+            setAllFollowingUsers([])
+            setShowMore(false)
+            setApiFollCalled(false)
         }
         // eslint-disable-next-line react-hooks/exhaustive-deps
-    }, [followingPage]);
+    }, [followingPage, userContex.token]);
 
     // const handleSeeAll= useCallback(()=>{
     //     //for optimize later
