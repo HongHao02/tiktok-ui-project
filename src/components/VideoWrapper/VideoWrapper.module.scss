@@ -1,0 +1,401 @@
+.wrapper {
+    display: flex;
+    flex-direction: row;
+    align-items: flex-start;
+    padding: 20px 0;
+    position: relative;
+    max-width: 692px;
+    height: unset;
+    width: unset;
+    transition-property: margin;
+    transition-duration: 0.3s;
+    margin-bottom: 0px;
+    border-bottom: 1px solid #e3e3e4;
+}
+
+/*avatar*/
+.profileLink {
+    flex: 0 0 auto;
+}
+
+.avatar {
+    width: 4.8rem;
+    height: 4.8rem;
+    border-radius: 50%;
+}
+/*content*/
+.content {
+    margin-left: 12px;
+    width: 624px;
+    flex: 1 1 624px;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+}
+//info
+.info {
+    display: flex;
+    align-items: center;
+}
+.owner {
+    flex-grow: 1;
+}
+.name {
+    display: flex;
+    align-items: center;
+    height: 24px;
+}
+.nickname {
+    &:hover {
+        text-decoration: underline;
+        color: currentColor;
+    }
+}
+.check {
+    margin-left: 4px;
+    font-size: 1.4rem;
+    color: rgb(32, 213, 236);
+}
+.fullname {
+    font-size: 1.4rem;
+    font-weight: 400;
+    line-height: 28px;
+    margin-left: 4px;
+}
+.description {
+    line-height: 22px;
+    color: var(--text-color);
+    font-weight: 400;
+}
+.music {
+    font-size: 12px;
+    display: -webkit-box;
+    display: -webkit-flex;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-align-items: center;
+    -webkit-box-align: center;
+    -ms-flex-align: center;
+    align-items: center;
+    &:hover {
+        text-decoration: underline;
+        color: currentColor;
+    }
+    .-icon {
+        margin-right: 4px;
+    }
+}
+.follow-btn {
+    justify-content: flex-end;
+    width: 100px;
+    height: 36px;
+}
+//body
+.body {
+    margin-top: 10px;
+    display: flex;
+    align-items: flex-end;
+}
+.video-layer {
+    --size-data: 600px;
+    --height-data: 177.77777777777777;
+    border-radius: 8px;
+    margin-right: 20px;
+    overflow: hidden;
+    position: relative;
+
+    &.vertical {
+        height: var(--size-data);
+    }
+    &.horizontal {
+        width: var(--size-data);
+    }
+    &:hover {
+        .volume-container {
+            .btn {
+                opacity: 1;
+            }
+        }
+        .control-btn {
+            opacity: 1;
+        }
+    }
+}
+@media (max-width: 1919px) {
+    .video-layer {
+        &.vertical {
+            --size-data: calc(316.66667px + 17.36111vw);
+        }
+    }
+}
+
+.loading {
+    left: 50%;
+    position: absolute;
+    top: 48%;
+    z-index: 3;
+}
+.loader {
+    --animation-duration: 0.9s;
+    --circle-diameter: 17.5px;
+    --circle-scale-percent: 0.2;
+    align-items: center;
+    display: inline-flex;
+    height: 100%;
+    left: calc(var(--circle-diameter) * -1);
+    pointer-events: none;
+    position: relative;
+    user-select: none;
+    -ms-user-select: none;
+    -moz-user-select: none;
+    -webkit-user-select: none;
+    width: 34px;
+    z-index: 1;
+    &.loading-medium {
+        --circle-diameter: 16.5px;
+    }
+    &::before,
+    &::after {
+        -webkit-animation-duration: var(--animation-duration);
+        animation-duration: var(--animation-duration);
+        -webkit-animation-iteration-count: infinite;
+        animation-iteration-count: infinite;
+        -webkit-animation-name: TiktokLoading_revolve;
+        animation-name: TiktokLoading_revolve;
+        -webkit-animation-timing-function: ease-in-out;
+        animation-timing-function: ease-in-out;
+        border-radius: 50%;
+        content: ' ';
+        display: table-cell;
+        height: var(--circle-diameter);
+        mix-blend-mode: darken;
+        position: absolute;
+        width: var(--circle-diameter);
+    }
+    &::before {
+        background: #4de8f4;
+    }
+    &::after {
+        -webkit-animation-delay: calc(var(--animation-duration) / -2);
+        animation-delay: calc(var(--animation-duration) / -2);
+        background: #fd3e3e;
+    }
+}
+
+@keyframes TiktokLoading_revolve {
+    0% {
+        left: 0;
+    }
+    25% {
+        -webkit-transform: scale(calc(1 + var(--circle-scale-percent)));
+        transform: scale(calc(1 + var(--circle-scale-percent)));
+    }
+    50% {
+        left: var(--circle-diameter);
+    }
+    75% {
+        -webkit-transform: scale(calc(1 - var(--circle-scale-percent)));
+        transform: scale(calc(1 - var(--circle-scale-percent)));
+    }
+    100% {
+        left: 0;
+    }
+}
+.default-thump {
+    background-color: #ddd;
+    cursor: pointer;
+    height: 100%;
+    position: relative;
+    width: calc(var(--size-data) / 100 * 56.25);
+    z-index: 1;
+
+    .image,
+    .video {
+        height: 100%;
+        object-fit: cover;
+        position: relative;
+        width: 100%;
+        z-index: 1;
+    }
+
+    .video {
+        left: 0;
+        position: absolute;
+        top: 0;
+    }
+
+    .hiden {
+        z-index: 0 !important;
+    }
+}
+.control-btn {
+    align-items: center;
+    background-color: transparent;
+    bottom: 24px;
+    display: flex;
+    height: 40px;
+    justify-content: center;
+    opacity: 0;
+    position: absolute;
+    transition: opacity 0.3s;
+    width: 40px;
+    z-index: 2;
+}
+.report {
+    bottom: auto;
+    color: #fff;
+    font-weight: 600;
+    height: auto;
+    padding: 4px 0;
+    right: 20px;
+    top: 6px;
+    width: auto;
+
+    .icon {
+        width: 16px;
+        height: 16px;
+    }
+}
+.play {
+    left: 12px;
+}
+/*volume control container*/
+.volume-container {
+    align-items: center;
+    bottom: 24px;
+    display: flex;
+    position: absolute;
+    right: 12px;
+    -webkit-transform: rotate(90deg);
+    transform: rotate(90deg);
+    -webkit-transform-origin: calc(100% - 20px);
+    transform-origin: calc(100% - 20px);
+    transition: opacity 0.3s;
+    z-index: 2;
+
+    .volume-btn {
+        bottom: 0;
+        opacity: 0;
+        position: relative;
+        -webkit-transform: rotate(-90deg);
+        transform: rotate(-90deg);
+    }
+
+    &:hover {
+        .control {
+            display: flex;
+        }
+    }
+}
+
+.isMuted {
+    opacity: 1 !important;
+}
+.control {
+    align-items: center;
+    animation: play-icon-effect 0.3s;
+    background-color: var(--background-gray-color-34);
+    border-radius: 32px;
+    cursor: pointer;
+    display: none;
+    height: 24px;
+    padding: 0 8px;
+    position: relative;
+    -webkit-transform: rotate(180deg);
+    transform: rotate(180deg);
+    width: 64px;
+
+    .background {
+        background-color: hsla(0, 0%, 100%, 0.34);
+        border-radius: 100px;
+        height: 2px;
+        position: relative;
+        width: 100%;
+    }
+    .bar {
+        background-color: #fff;
+        border-radius: inherit;
+        height: 100%;
+        left: 0;
+        position: absolute;
+        top: 0;
+        width: 50%;
+
+        .dot {
+            background-color: inherit;
+            border-radius: 50%;
+            height: 12px;
+            position: absolute;
+            right: 0;
+            top: 50%;
+            -webkit-transform: translate(100%, -50%);
+            transform: translate(100%, -50%);
+            width: 12px;
+        }
+    }
+    .type-range {
+        height: 2px;
+        left: 8px;
+        opacity: 0;
+        position: absolute;
+        right: 8px;
+    }
+}
+@keyframes play-icon-effect {
+    0% {
+        opacity: 0;
+    }
+
+    to {
+        opacity: 1;
+    }
+}
+
+//---
+/*Features container*/
+.features-layer {
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+}
+.item {
+    align-items: center;
+    display: flex;
+    flex-direction: column;
+    cursor: pointer;
+}
+.icon {
+    display: -webkit-box;
+    display: -webkit-flex;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-box-pack: center;
+    -ms-flex-pack: center;
+    -webkit-justify-content: center;
+    justify-content: center;
+    -webkit-align-items: center;
+    -webkit-box-align: center;
+    -ms-flex-align: center;
+    align-items: center;
+    font-size: 0px;
+    border-radius: 50%;
+    -webkit-transition: all ease-in-out 200ms;
+    transition: all ease-in-out 200ms;
+    width: 48px;
+    height: 48px;
+    background-color: rgba(22, 24, 35, 0.06);
+    margin-top: 8px;
+    margin-bottom: 6px;
+}
+.svg {
+    width: 2rem;
+    height: 2rem;
+}
+.count {
+    color: var(--text-color);
+    font-size: 1.2rem;
+    line-height: 17px;
+    -webkit-user-select: none;
+    user-select: none;
+    white-space: nowrap;
+}
