@@ -15,7 +15,7 @@ const cx = classNames.bind(styles);
 function AccountItem({ data }) {
     const renderPreview = (attrs) => {
         return (
-            <Link to={`/tiktok-ui-project/:${data.nickname}`}>
+            <Link to={`/:${data.nickname}`}>
                 <div tabIndex="-1" {...attrs}>
                 <PopperWrapper>
                     <div className={cx('preview')}>
@@ -29,7 +29,7 @@ function AccountItem({ data }) {
     return (
         <div>
             <Tippy interactive delay={[500, 0]} offset={[-20, 0]} placement="bottom" render={renderPreview}>
-                <Link to={`/tiktok-ui-project/:${data.nickname}`} className={cx('account-item')}>
+                <Link to={`/:${data.nickname}`} className={cx('account-item')}>
                     <Image className={cx('avatar')} src={data.avatar} alt={data.nickname} />
                     <div className={cx('item-info')}>
                         <p className={cx('nickname')}>
