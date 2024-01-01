@@ -98,7 +98,7 @@ function VideoWrapper({ data = {} }) {
 
     return (
         <div className={cx('wrapper')}>
-            <Link to={`/:${'honghaocp'}`}>
+            <Link to={`/tiktok-ui-project/:${'honghaocp'}`}>
                 <div className={cx('profileLink')}>
                     <Image src={images.noImage} className={cx('avatar')} />
                 </div>
@@ -107,7 +107,7 @@ function VideoWrapper({ data = {} }) {
                 <div className={cx('info')}>
                     <div className={cx('owner')}>
                         <div className={cx('name')}>
-                            <Link to={`/:${'honghaocp'}`}>
+                            <Link to={`/tiktok-ui-project/:${'honghaocp'}`}>
                                 <strong className={cx('nickname')}>honghaockg</strong>
                                 <span className={cx('check')}>
                                     <FontAwesomeIcon icon={faCircleCheck} />
