@@ -15,6 +15,7 @@ import {
 import * as userService from '~/services/userService';
 import ReferenceArea from '~/components/ReferenceArea';
 import { UserContext } from '~/Context';
+import config from '~/config';
 
 const cx = classNames.bind(styles);
 
@@ -127,14 +128,14 @@ function Sidebar() {
         <div className={cx('sidebar-container')}>
             <aside className={cx('wrapper')}>
                 <Menu>
-                    <MenuItem title="For you" to="/" icon={<HomeIcon />} activeIcon={<HomeIconActive />} />
+                    <MenuItem title="For you" to={config.routes.home} icon={<HomeIcon />} activeIcon={<HomeIconActive />} />
                     <MenuItem
                         title="Following"
-                        to="/following"
+                        to={config.routes.following}
                         icon={<UserGroupIcon />}
                         activeIcon={<UserGroupIconActive />}
                     />
-                    <MenuItem title="Live" to="/live" icon={<LiveIcon />} activeIcon={<LiveIconActive />} />
+                    <MenuItem title="Live" to={config.routes.live} icon={<LiveIcon />} activeIcon={<LiveIconActive />} />
                 </Menu>
                 <SuggestedAccount
                     type="Suggested"
