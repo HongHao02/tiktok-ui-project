@@ -7,12 +7,16 @@ import VideoWrapper from '~/components/VideoWrapper';
 const cx = classNames.bind(styles);
 
 function Home() {
-    const [currentVideoList, setCurrentVideoList] = useState([{}, {}]);
+
+    const [currentVideoList, setCurrentVideoList] = useState([{},{}]);
     const [page, setPage] = useState(1);
+
+
     return (
         <div className={cx('wrapper')}>
-            <VideoWrapper data={{}} />
-            <VideoWrapper data={{}} />
+            {currentVideoList.map((video, index) => (
+                <VideoWrapper data={video} key={index} />
+            ))}
         </div>
     );
 }

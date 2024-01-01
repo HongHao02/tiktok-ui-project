@@ -1,7 +1,7 @@
 import PropTypes from 'prop-types';
 import classNames from 'classnames/bind';
 import { Link } from 'react-router-dom';
-import { useRef, useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 
 import styles from './VideoWrapper.module.scss';
 import { PlayIcon, PauseIcon, SpeakerActiveIcon, SpeakerMuteIcon, MucsicIcon } from '~/components/Icons';
@@ -19,15 +19,83 @@ import {
     faShare,
 } from '@fortawesome/free-solid-svg-icons';
 import routes from '~/config/routes';
-
+import video1 from '~/assets/videos/video1.mp4';
+import { useContext } from 'react';
+import { UserContext } from '~/Context';
 const cx = classNames.bind(styles);
 
 function VideoWrapper({ data = {} }) {
-    const [isPlay, setIsPlay] = useState(false);
-    const [isActive, setIsActive] = useState(true);
+    const userContext = useContext(UserContext);
+    const [isPlay, setIsPlay] = useState(true);
+    const [isActive, setIsActive] = useState(false);
     const [isMuted, setIsMuted] = useState(true);
+    const [isHideLoading, setIsHideLoading] = useState(true);
+    const [isInViewport, setIsInViewport] = useState(false);
+    const [isPlaying, setIsPlaying] = useState(true);
 
     const videoRef = useRef();
+    useEffect(() => {
+        videoRef.current.increaseVolume(userContext.volume);
+        if (userContext.volume > 0) {
+            setIsMuted(false);
+        } else {
+            setIsMuted(true);
+        }
+    }, [userContext.volume]);
+    useEffect(() => {
+        if (isPlaying) {
+            videoRef.current.play();
+        } else {
+            videoRef.current.pause();
+        }
+    }, [isPlaying]);
+    const handleVolume = (e) => {
+        const newVolume = parseInt(e.target.value);
+        console.log('Volume in range', newVolume);
+        if (newVolume === 0) {
+            setIsMuted(true);
+        } else {
+            setIsMuted(false);
+        }
+        userContext.handleChangeVolume(newVolume);
+        videoRef.current.increaseVolume(newVolume);
+    };
+    const handlePlay = () => {
+        if (isPlay) {
+            videoRef.current.pause()
+            setIsPlay(false);
+        } else {
+            videoRef.current.play()
+            setIsPlay(true);
+        }
+    };
+    const handleChangeSpeaker = () => {
+        if (isMuted) {
+            setIsMuted(false);
+            videoRef.current.increaseVolume(50);
+            userContext.handleChangeVolume(50);
+        } else {
+            setIsMuted(true);
+            videoRef.current.increaseVolume(0);
+            userContext.handleChangeVolume(0);
+        }
+    };
+    const handleVideoEnd = () => {
+        videoRef.current.handleSetDefaultVolume();
+        videoRef.current.play();
+    };
+    const handleVideoError = () => {
+        setIsHideLoading(true);
+    };
+    const onLoaded = () => {
+        videoRef.current.play();
+        setIsActive(false);
+        setIsPlay(true);
+    };
+    const handleVideoVisibilityChange = (isVisible) => {
+        setIsPlaying(isVisible);
+    };
+
     return (
         <div className={cx('wrapper')}>
             <Link to={`/:${'honghaocp'}`}>
@@ -59,7 +127,7 @@ function VideoWrapper({ data = {} }) {
                 </div>
                 <div className={cx('body')}>
                     <div className={cx('video-layer', 'vertical')}>
-                        <i className={cx('loading')}>
+                        <i className={cx('loading', { hide: isHideLoading })}>
                             <div className={cx('loader', 'loading-medium')}></div>
                         </i>
                         <div className={cx('default-thump')}>
@@ -69,13 +137,23 @@ function VideoWrapper({ data = {} }) {
                                     src="https://files.fullstack.edu.vn/f8-tiktok/videos/3028-64e8bad4a45ac.jpg"
                                 />
                             ) : (
-                                <Video ref={videoRef} className={cx('video')} />
+                                <Video
+                                    ref={videoRef}
+                                    src={video1}
+                                    onEnd={handleVideoEnd}
+                                    onError={handleVideoError}
+                                    onLoaded={onLoaded}
+                                    onVisibilityChange={handleVideoVisibilityChange}
+                                    className={cx('video')}
+                                />
                             )}
                         </div>
                         <button className={cx('control-btn', 'report')}>
                             <FontAwesomeIcon icon={faCircleInfo} className={cx('icon')} />
                         </button>
-                        <button className={cx('control-btn', 'play')}>{isPlay ? <PauseIcon /> : <PlayIcon />}</button>
+                        <button className={cx('control-btn', 'play')} onClick={handlePlay}>
+                            {isPlay ? <PauseIcon /> : <PlayIcon />}
+                        </button>
                         <div className={cx('volume-container')}>
                             <div className={cx('control')}>
                                 <div className={cx('background')}>
@@ -83,9 +161,20 @@ function VideoWrapper({ data = {} }) {
                                         <div className={cx('dot')}></div>
                                     </div>
                                 </div>
-                                <input className={cx('type-range')} type="range" min="0" max="100" step="1" />
+                                <input
+                                    className={cx('type-range')}
+                                    type="range"
+                                    value={userContext.volume}
+                                    min="0"
+                                    max="100"
+                                    step="1"
+                                    onChange={handleVolume}
+                                />
                             </div>
-                            <button className={cx('control-btn', 'volume-btn', { isMuted: isMuted })}>
+                            <button
+                                className={cx('control-btn', 'volume-btn', { isMuted: isMuted })}
+                                onClick={handleChangeSpeaker}
+                            >
                                 {isMuted ? <SpeakerMuteIcon /> : <SpeakerActiveIcon />}
                             </button>
                         </div>

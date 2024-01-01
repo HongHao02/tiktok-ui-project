@@ -102,6 +102,7 @@ function UserContextProvider({ children }) {
 
     const [loginSuccess, setLoginSuccess] = useState(false);
     const [logoutSuccess, setLogoutSuccess] = useState(false);
+    const [volume, setVolume] = useState(0);
 
     useEffect(() => {
         if (!token) {
@@ -114,7 +115,7 @@ function UserContextProvider({ children }) {
     useEffect(() => {
         const timer = setTimeout(() => {
             setLoginSuccess(false);
-        },3000);
+        }, 3000);
 
         return () => clearTimeout(timer);
     }, [loginSuccess]);
@@ -122,7 +123,7 @@ function UserContextProvider({ children }) {
     useEffect(() => {
         const timer = setTimeout(() => {
             setLogoutSuccess(false);
-        },3000);
+        }, 3000);
 
         return () => clearTimeout(timer);
     }, [logoutSuccess]);
@@ -144,6 +145,9 @@ function UserContextProvider({ children }) {
     const handleChangeLogoutSuccess = (state) => {
         setLogoutSuccess(state);
     };
+    const handleChangeVolume = (newVolume) => {
+        setVolume(newVolume);
+    };
     const value = {
         MENU_ITEMS,
         USER_MENU,
@@ -153,12 +157,14 @@ function UserContextProvider({ children }) {
         currentMenu,
         loginSuccess,
         logoutSuccess,
+        volume,
         handleChangeToken,
         handleChangeNickName,
         handleChangeCurrentUser,
         handleChangeCurrentMenu,
         handleChangeLoginSuccess,
         handleChangeLogoutSuccess,
+        handleChangeVolume,
     };
     return (
         <UserContext.Provider value={value}>

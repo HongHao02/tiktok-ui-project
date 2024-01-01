@@ -134,6 +134,9 @@
     position: absolute;
     top: 48%;
     z-index: 3;
+    &.hide{
+        z-index: 0!important;
+    }
 }
 .loader {
     --animation-duration: 0.9s;
@@ -151,6 +154,7 @@
     -webkit-user-select: none;
     width: 34px;
     z-index: 1;
+    
     &.loading-medium {
         --circle-diameter: 16.5px;
     }
