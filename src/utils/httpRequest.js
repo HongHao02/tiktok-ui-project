@@ -13,7 +13,8 @@ if (isLoggedIn) {
 }
 
 const httpRequest = axios.create({
-    baseURL: process.env.REACT_APP_BASE_URL,
+    // baseURL: process.env.REACT_APP_BASE_URL,
+    baseURL: 'https://tiktok.fullstack.edu.vn/api/',
     headers: {
         Authorization: `Bearer ${token}`,
     },
